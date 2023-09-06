@@ -1,5 +1,22 @@
 {
   "dependencies": {
+    "com.koitan.koitanlib": {
+      "version": "https://github.com/tk-koitan/KoitanLibPackage.git?path=Packages/KoitanLib",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.textmeshpro": "3.0.6",
+        "com.unity.inputsystem": "1.5.1"
+      },
+      "hash": "2784dd9b2d168affa481d54cb544dad94a2d4af3"
+    },
+    "com.scrtwpns.mixbox": {
+      "version": "https://github.com/scrtwpns/mixbox.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "5a85bac45c012876bbcd984ce062abd3f4e44b51"
+    },
     "com.unity.2d.animation": {
       "version": "9.0.3",
       "depth": 1,
@@ -157,6 +174,15 @@
       "source": "registry",
       "dependencies": {
         "com.unity.test-framework": "1.1.9"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.inputsystem": {
+      "version": "1.6.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.uielements": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
