@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using KoitanLib;
 
 public class PersonController : MonoBehaviour
 {
@@ -18,9 +19,10 @@ public class PersonController : MonoBehaviour
     void Update()
     {
         // キーボードの入力を受け取る
-        float horizontalInput = Input.GetAxis("Horizontal");
-        //float horizontalInput = KoitanInput.GetStick(StickCode LeftStick, 1);
+        //float horizontalInput = Input.GetAxis("Horizontal");
+        float horizontalInput = KoitanInput.GetStick(StickCode.LeftStick).x;
         float verticalInput = Input.GetAxis("Vertical");
+        Debug.Log(horizontalInput);
 
         // オブジェクトを移動させる
         Vector3 movement = new Vector3(horizontalInput, verticalInput, 0f) * moveSpeed * Time.deltaTime;
