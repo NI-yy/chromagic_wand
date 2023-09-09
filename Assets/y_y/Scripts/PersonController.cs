@@ -8,6 +8,7 @@ public class PersonController : MonoBehaviour
     public float moveSpeed = 5.0f; // 移動速度
     public float jumpForce = 5.0f; // ジャンプの力
     private Rigidbody2D rb;
+    float horizontalInput;
 
     // Start is called before the first frame update
     void Start()
@@ -18,9 +19,7 @@ public class PersonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // キーボードの入力を受け取る
-        //float horizontalInput = Input.GetAxis("Horizontal");
-        float horizontalInput = KoitanInput.GetStick(StickCode.LeftStick).x;
+        horizontalInput = KoitanInput.GetStick(StickCode.LeftStick).x;
         float verticalInput = Input.GetAxis("Vertical");
         Debug.Log(horizontalInput);
 
