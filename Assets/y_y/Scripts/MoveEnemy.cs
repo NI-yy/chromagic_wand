@@ -21,6 +21,7 @@ public class MoveEnemy : MonoBehaviour
 
     private float time;
     private float timeTh = 3.0f;
+    Rigidbody rb;
 
 
     // Use this for initialization
@@ -32,6 +33,7 @@ public class MoveEnemy : MonoBehaviour
         destination = startPosition + new Vector3(randDestination, 0f, 0f);
         arrived = false;
         time = 0f;
+        rb = this.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -43,9 +45,11 @@ public class MoveEnemy : MonoBehaviour
             animator.SetBool("onGround", false);
             direction = (destination - transform.position).normalized;
             transform.localScale = new Vector3(-direction.x * 3, 3f, 3f);
-            transform.Translate(direction * walkSpeed * Time.deltaTime);
+            //transform.Translate(direction * walkSpeed * Time.deltaTime);
+            rb.AddForce(direction * walkSpeed);
 
-            if (Vector3.Distance(transform.position, destination) < 0.05f)
+
+            if (Mathf.Abs(transform.position.x - destination.x) < 0.05f)
             {
                 arrived = true;
             }
