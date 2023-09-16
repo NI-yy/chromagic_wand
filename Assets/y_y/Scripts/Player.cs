@@ -46,6 +46,8 @@ public class Player : MonoBehaviour
     private Vector3 initialPosition;
     private float jumpingTimeCount;
     public float mass;
+    [SerializeField]
+    GameObject bulletPrefab;
 
 
 
@@ -91,7 +93,7 @@ public class Player : MonoBehaviour
         else
         {
             anim.SetBool("onGround", false);
-            anim.SetBool("jumping", false);
+            //anim.SetBool("jumping", false);
             anim.SetBool("running", false);
 
             ManageXMoveAir();
@@ -112,13 +114,12 @@ public class Player : MonoBehaviour
     private void GetKeysInput()
     {
         horizontalKeyRaw = KoitanInput.GetStick(StickCode.LeftStick).x;
-        Debug.Log(horizontalKeyRaw);
         verticalKeyRaw = KoitanInput.GetStick(StickCode.LeftStick).y;
 
         moveKeyVec = new Vector3(verticalKeyRaw, horizontalKeyRaw);
 
 
-        if (Input.GetKey(KeyCode.Space) || KoitanInput.Get(ButtonCode.A) || KoitanInput.Get(ButtonCode.B))
+        if (Input.GetKey(KeyCode.Space) || KoitanInput.Get(ButtonCode.A))
         {
             spaceKey = true;
         }
@@ -127,16 +128,20 @@ public class Player : MonoBehaviour
             spaceKey = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || KoitanInput.GetDown(ButtonCode.A) || KoitanInput.GetDown(ButtonCode.B))
+        if (Input.GetKeyDown(KeyCode.Space) || KoitanInput.GetDown(ButtonCode.A))
         {
             spaceKeyDown = true;
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Attack();
         }
     }
 
     private void ResetKeyDown()
     {
         spaceKeyDown = false;
-        //Debug.Log(("reset", Time.time));
     }
 
 
@@ -254,9 +259,10 @@ public class Player : MonoBehaviour
 
         if (spaceKeyDown)
         {
+            //Debug.Log("jump");
             rb.AddForce(new Vector2(0, 1) * initialForce, ForceMode2D.Impulse);
             jumpingTimeCount = 0f;
-            anim.SetBool("jumping", true);
+            //anim.SetBool("jumping", true);
             //soundManagerScript.PlayOneShot(0);
         }
 
@@ -276,5 +282,11 @@ public class Player : MonoBehaviour
         }
 
         rb.AddForce(new Vector2(0, -1) * gravity);
+    }
+
+    private void Attack()
+    {
+        Vector3 pos = transform.position + new Vector3(0.5f, -0.5f, 0);
+        Instantiate(bulletPrefab, pos, Quaternion.identity);
     }
 }
