@@ -105,16 +105,16 @@ MonoBehaviour:
   enemyStatus:
     maxHP: 1
     moveSpeed: 0
-    attackSIgnalOffset: {x: 0, y: 1}
+    attackSignalOffset: {x: 0, y: 1}
   groundCheck: {fileID: 5486468423528659203}
-  jumpIntervalTime: 2
-  jumpHeight: 7
+  jumpIntervalTime: 1.5
+  jumpHeight: 8
   jumpAngel: 60
   doesAttack: 1
   attackInterval: 3
-  attackDelayTime: 0.8
-  attackHeight: 12
-  attackAngel: 80
+  attackDelayTime: 1
+  attackHeight: 11
+  attackAngel: 75
   projectorData: {fileID: 11400000, guid: b91727740f4826f4888a45cb9d357d39, type: 2}
 --- !u!61 &942636865532734005
 BoxCollider2D:
