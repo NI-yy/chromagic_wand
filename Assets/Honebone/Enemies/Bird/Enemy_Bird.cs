@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Enemy_Bird : Enemy
 {
-    private Animator anim;
-    SpriteRenderer sprite;
+     
     [Header("x:ˆÚ“®•ûŒü 0:right 1:up 2: left 3:down\ny:ˆÚ“®ŽžŠÔ")]
     [SerializeField]
     Vector2[] moveList;
@@ -15,8 +14,7 @@ public class Enemy_Bird : Enemy
 
     void Start()
     {
-        anim = GetComponent<Animator>();
-        sprite = GetComponent<SpriteRenderer>();
+        Init();
         StartMove();
     }
     private void FixedUpdate()
