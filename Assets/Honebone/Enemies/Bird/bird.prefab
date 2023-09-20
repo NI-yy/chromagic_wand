@@ -102,9 +102,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackSignal: {fileID: 2999929967058885880, guid: 4c31b2477ababfd44b9ce4d859414226, type: 3}
   enemyStatus:
-    maxHP: 0
+    maxHP: 1
     moveSpeed: 0
-    attackSIgnalOffset: {x: 0, y: 0}
+    attackSignalOffset: {x: 0, y: 1}
+  groundCheck: {fileID: 0}
   moveList: []
 --- !u!61 &6282494247008044363
 BoxCollider2D:

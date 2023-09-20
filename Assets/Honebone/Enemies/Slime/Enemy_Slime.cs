@@ -27,6 +27,7 @@ public class Enemy_Slime : Enemy
     bool isOnGround;
     bool interval = true;
     bool jumped;
+    bool jumping;
     bool attack;
     int jumpCount;
     // Start is called before the first frame update
@@ -35,7 +36,16 @@ public class Enemy_Slime : Enemy
         Init();
         StartCoroutine(JumpInterval());
     }
-
+    private void FixedUpdate()
+    {
+        if (jumping)
+        {
+            int i = 1;
+            if (GetPlayerDir().x < 0) { i = -1; }
+            if (attack) { rb.AddForce(new Vector2(Mathf.Cos(attackAngel * Mathf.Deg2Rad) * i, 0) * attackHeight, ForceMode2D.Force); }
+            else { rb.AddForce(new Vector2(Mathf.Cos(jumpAngel * Mathf.Deg2Rad) * i, 0) * jumpHeight, ForceMode2D.Force); }
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -53,8 +63,9 @@ public class Enemy_Slime : Enemy
             }
             else { StartCoroutine(Jump()); }
         }
-        if (jumped && isOnGround)
+        if (jumped && isOnGround)//’…’n
         {
+            jumping = false;
             jumped = false;
             if (attack)
             {
@@ -71,12 +82,15 @@ public class Enemy_Slime : Enemy
 
         SetSpriteFlip();
     }
+   
     IEnumerator Jump()
     {
-        int i = 1;
-        if (GetPlayerDir().x < 0) { i = -1; }
-        rb.AddForce(new Vector2(Mathf.Cos(jumpAngel * Mathf.Deg2Rad) * i, Mathf.Sin(jumpAngel * Mathf.Deg2Rad)) * jumpHeight, ForceMode2D.Impulse);
+        //int i = 1;
+        //if (GetPlayerDir().x < 0) { i = -1; }
+        //rb.AddForce(new Vector2(Mathf.Cos(jumpAngel * Mathf.Deg2Rad) * i, Mathf.Sin(jumpAngel * Mathf.Deg2Rad)) * jumpHeight, ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(0, Mathf.Sin(jumpAngel * Mathf.Deg2Rad)) * jumpHeight, ForceMode2D.Impulse);
         anim.SetBool("Jump", true);
+        jumping = true;
         yield return new WaitForSeconds(0.2f);
         jumped = true;
     }
@@ -90,10 +104,12 @@ public class Enemy_Slime : Enemy
     {
         Signal();
         yield return new WaitForSeconds(attackDelayTime);
-        int i = 1;
-        if (GetPlayerDir().x < 0) { i = -1; }
-        rb.AddForce(new Vector2(Mathf.Cos(attackAngel * Mathf.Deg2Rad) * i, Mathf.Sin(attackAngel * Mathf.Deg2Rad)) * attackHeight, ForceMode2D.Impulse);
+        //int i = 1;
+        //if (GetPlayerDir().x < 0) { i = -1; }
+        //rb.AddForce(new Vector2(Mathf.Cos(attackAngel * Mathf.Deg2Rad) * i, Mathf.Sin(attackAngel * Mathf.Deg2Rad)) * attackHeight, ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(0, Mathf.Sin(attackAngel * Mathf.Deg2Rad)) * attackHeight, ForceMode2D.Impulse);
         anim.SetBool("Attack", true);
+        jumping = true;
         yield return new WaitForSeconds(0.2f);
         jumped = true;
     }

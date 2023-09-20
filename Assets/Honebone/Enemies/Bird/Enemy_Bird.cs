@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy_Bird : Enemy
 {
      
-    [Header("x:ˆÚ“®•ûŒü 0:right 1:up 2: left 3:down\ny:ˆÚ“®ŽžŠÔ")]
+    [Header("x:ˆÚ“®•ûŒü 0:right 1:up 2: left 3:down 4:stay\ny:ˆÚ“®ŽžŠÔ")]
     [SerializeField]
     Vector2[] moveList;
 
@@ -43,6 +43,9 @@ public class Enemy_Bird : Enemy
             case 3:
                 moveVector = new Vector3(0, -1, 0);
                 anim.SetTrigger("Vertical");
+                break;
+            case 4:
+                moveVector = new Vector3(0, 0, 0);
                 break;
         }
         StartCoroutine(Move(moveList[currentMove].y));

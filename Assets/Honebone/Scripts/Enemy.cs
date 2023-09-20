@@ -12,9 +12,9 @@ public class Enemy : MonoBehaviour
     [System.Serializable]
     public class EnemyStatus
     {
-        public int maxHP;
+        public int maxHP = 1;
         public float moveSpeed;
-        [Header("çUåÇó\íõÇÃà íu")] public Vector2 attackSIgnalOffset;
+        [Header("çUåÇó\íõÇÃà íu")] public Vector2 attackSignalOffset=new Vector2(0,1);
     }
     [SerializeField]
     protected EnemyStatus enemyStatus;
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
 
     public void Signal()
     {
-        Vector3 signalPos = transform.position + enemyStatus.attackSIgnalOffset.ToVector3();
+        Vector3 signalPos = transform.position + enemyStatus.attackSignalOffset.ToVector3();
         Instantiate(attackSignal,signalPos,Quaternion.identity);
     }
     public void SetSpriteFlip()
@@ -100,4 +100,5 @@ public class Enemy : MonoBehaviour
 
 
     public Vector3 GetPlayerDir() { return (PlayerTF.position - transform.position).normalized; }
+    public float GetPlayerDistance() { return (PlayerTF.position - transform.position).magnitude; }
 }
