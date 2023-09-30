@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Bee : Enemy
+public class Enemy_Bat : Enemy
 {
     [SerializeField]
     float engageRange;
@@ -14,18 +14,21 @@ public class Enemy_Bee : Enemy
     [SerializeField]
     float attackDelayTime;
     [SerializeField]
+    float attackDurationTime;
+    [SerializeField]
     float attackIntervalTime;
     [SerializeField]
-    EnemyProjectorData projectorData;
+    float attackSpeed;
 
     [SerializeField]
     float minHeight;
 
     Vector3 origin;
     Vector3 direction;
+    Vector3 attackDirection;
 
     bool interval;
-    bool inDelay;
+    bool attacking;
     bool engaged;
 
     RaycastHit2D groundHit;
@@ -44,11 +47,12 @@ public class Enemy_Bee : Enemy
         direction = GetPlayerDir();
         RaycastHit2D hit2D = Physics2D.Raycast(origin, direction, engageRange);
         if (engaged) { Debug.DrawRay(origin, direction * disengageRange, Color.blue); }
-        else { Debug.DrawRay(origin, direction * engageRange, Color.yellow); }       
+        else { Debug.DrawRay(origin, direction * engageRange, Color.yellow); }
         Debug.DrawRay(origin, direction * attackRange, Color.red);
 
-        groundHit = Physics2D.Raycast(origin, Vector2.down, minHeight);
+        groundHit= Physics2D.Raycast(origin, Vector2.down, minHeight);
         Debug.DrawRay(origin, Vector2.down * minHeight, Color.gray);
+
 
         if (hit2D.CheckRaycastHit("Player"))
         {
@@ -59,33 +63,39 @@ public class Enemy_Bee : Enemy
             if (!interval && GetPlayerDistance() <= attackRange)//UŒ‚
             {
                 interval = true;
-                inDelay = true;
                 StartCoroutine(Attack());
             }
         }
-        if (engaged&& GetPlayerDistance() > disengageRange) { engaged = false; }//’Ç”öI—¹
+        if (engaged && GetPlayerDistance() > disengageRange) { engaged = false; }//’Ç”öI—¹
+
+        
 
         SetSpriteFlip();
     }
     private void FixedUpdate()
     {
-        if (engaged&&!inDelay&& GetPlayerDistance() > attackRange)
+        if (engaged && !attacking && GetPlayerDistance() > attackRange)
         {
             transform.Translate(GetPlayerDir() * enemyStatus.moveSpeed * 0.01f);
         }
+        if (attacking)
+        {
+            transform.Translate(attackDirection * attackSpeed * 0.01f);
+        }
 
-        if (groundHit.CheckRaycastHit("Ground")) { transform.Translate(Vector3.up * enemyStatus.moveSpeed * 0.01f); }
-        //rb.velocity = Vector2.zero;
+        if (!attacking && groundHit.CheckRaycastHit("Ground")) { transform.Translate(Vector3.up * enemyStatus.moveSpeed * 0.01f); }
+
     }
 
     IEnumerator Attack()
     {
         Signal();
         yield return new WaitForSeconds(attackDelayTime);
-        inDelay = false;
-        StartFireProjectile(projectorData, new Vector3());
+        attackDirection = GetPlayerDir();
+        attacking = true;
+        yield return new WaitForSeconds(attackDurationTime);
+        attacking = false;
         yield return new WaitForSeconds(attackIntervalTime);
         interval = false;
     }
-
 }

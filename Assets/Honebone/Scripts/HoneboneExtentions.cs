@@ -9,5 +9,10 @@ public static class HoneboneExtentions
         Debug.DrawRay(ray.origin, ray.direction * range, Color.red);
     }
     public static Vector3 ToVector3(this Vector2 vector) { return new Vector3(vector.x, vector.y, 0); }
+
+    public static bool CheckRaycastHit(this RaycastHit2D hit,string tagName)
+    {
+        return hit.collider != null && hit.collider.CompareTag(tagName);
+    }
     
 }
