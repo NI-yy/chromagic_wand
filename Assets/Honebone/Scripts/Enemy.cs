@@ -100,5 +100,6 @@ public class Enemy : MonoBehaviour
 
 
     public Vector3 GetPlayerDir() { return (PlayerTF.position - transform.position).normalized; }
+    public Vector2 GetPlayerDir_Horizontal() { return new Vector2(GetPlayerDir().x, 0).normalized; }
     public float GetPlayerDistance() { return (PlayerTF.position - transform.position).magnitude; }
 }
