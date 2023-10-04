@@ -21,7 +21,6 @@ public class PersonController : MonoBehaviour
     {
         horizontalInput = KoitanInput.GetStick(StickCode.LeftStick).x;
         float verticalInput = Input.GetAxis("Vertical");
-        Debug.Log(horizontalInput);
 
         // オブジェクトを移動させる
         Vector3 movement = new Vector3(horizontalInput, verticalInput, 0f) * moveSpeed * Time.deltaTime;

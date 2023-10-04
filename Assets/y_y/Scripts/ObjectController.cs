@@ -16,6 +16,7 @@ public class ObjectController : MonoBehaviour
     Color color_mix;
     Camera mainCamera;
     bool flag = true;
+    float h, s, v;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +44,9 @@ public class ObjectController : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             color_mix = Mixbox.Lerp(color, color_2, 0.5f);
+            Debug.Log(color_mix);
+            Color.RGBToHSV(color_mix, out h, out s, out v);
+            Debug.Log((h, s, v));
             SpriteRenderer spriterenderer = GetComponent<SpriteRenderer>();
             spriterenderer.color = color_mix;
         }
