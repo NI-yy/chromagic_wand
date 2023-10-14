@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSignal: {fileID: 2999929967058885880, guid: 4c31b2477ababfd44b9ce4d859414226, type: 3}
+  projector: {fileID: 3801495604474907351, guid: ad7ccf4eb4cfec04fb69e71793dd9385, type: 3}
   enemyStatus:
     maxHP: 1
     moveSpeed: 0

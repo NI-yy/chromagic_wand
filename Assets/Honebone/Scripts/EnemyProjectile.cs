@@ -49,19 +49,23 @@ public class EnemyProjectile : MonoBehaviour
         tf.Translate(Vector3.up * projectileSpeed / 33f);
     }
 
-    void DestroyPJTL()
+    void DestroyPJTL(bool expired)
     {
         disabled = true;
         GetComponent<Collider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
 
+        AtTheEnd(expired);
+
 
         Destroy(gameObject, 1f);
     }
+    /// <summary>expired:éûä‘êÿÇÍÇ…ÇÊÇÈîjâÛÇ©</summary>
+    public virtual void AtTheEnd(bool expired) { }//è¡ñ≈éûóUî≠
 
     IEnumerator CountDown()
     {
         yield return new WaitForSeconds(projectorData.projectileDuration);
-        if (!disabled) { DestroyPJTL(); }
+        if (!disabled) { DestroyPJTL(true); }
     }
 }
