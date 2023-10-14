@@ -59,7 +59,7 @@ public class Enemy_Wolf : Enemy
             rb.AddForce(new Vector2(Mathf.Cos(jumpAngel * Mathf.Deg2Rad) * i, 0) * jumpHeight, ForceMode2D.Force);
         }
 
-        if (groundHit.CheckRaycastHit("Ground") && isOnGround && jumpState == 0 && attackState == 0)//ジャンプ
+        if (groundHit.CheckRaycastHit("Ground") && isOnGround && engaged && jumpState == 0 && attackState == 0)//ジャンプ
         {
             jumpState = 1;
             StartCoroutine(Jump());
