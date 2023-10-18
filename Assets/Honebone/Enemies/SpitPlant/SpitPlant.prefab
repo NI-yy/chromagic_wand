@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSignal: {fileID: 2999929967058885880, guid: 4c31b2477ababfd44b9ce4d859414226, type: 3}
+  projector: {fileID: 3801495604474907351, guid: ad7ccf4eb4cfec04fb69e71793dd9385, type: 3}
   enemyStatus:
     maxHP: 1
     moveSpeed: 0
@@ -109,7 +110,7 @@ MonoBehaviour:
   range: 12
   attackDelayTime: 0.8
   attackIntervalTime: 2.5
-  projectorData: {fileID: 11400000, guid: fa7d90c721a32a543949b53c72360d1a, type: 2}
+  projectorData: {fileID: 11400000, guid: c05b04b9098af164d81b5fec686a7aaa, type: 2}
 --- !u!61 &1475721813701704161
 BoxCollider2D:
   m_ObjectHideFlags: 0

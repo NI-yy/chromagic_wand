@@ -101,9 +101,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSignal: {fileID: 2999929967058885880, guid: 4c31b2477ababfd44b9ce4d859414226, type: 3}
+  projector: {fileID: 0}
   enemyStatus:
     maxHP: 1
-    moveSpeed: 0
+    moveSpeed: 10
     attackSignalOffset: {x: 0, y: 1}
   groundCheck: {fileID: 0}
   moveList: []
