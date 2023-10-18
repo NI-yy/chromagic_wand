@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8058949608912143261}
   - component: {fileID: 8555324588709228984}
+  - component: {fileID: 6597605483236681035}
   - component: {fileID: 2859410030254061543}
   m_Layer: 0
   m_Name: thornAttack
@@ -79,6 +80,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1737049, y: 2.1688757}
   m_EdgeRadius: 0
+--- !u!114 &6597605483236681035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4210669607112187469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 467d36990ae008c45b9299209d23d6fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &2859410030254061543
 Rigidbody2D:
   serializedVersion: 4
@@ -178,7 +191,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 6853a3e6f2d28f8478472c84bd46749d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -110,8 +110,7 @@ public class Enemy_Minotaurus : Enemy
         for (int i = 0; i < shockWaveAmount; i++)
         {
             RaycastHit2D[] ground = Physics2D.RaycastAll(raycastPos, Vector2.down, groundCheckRange);
-            Debug.DrawRay(raycastPos, Vector2.down * groundCheckRange, Color.gray, 1f);
-
+            //Debug.DrawRay(raycastPos, Vector2.down * groundCheckRange, Color.gray, 1f);
             bool groundFound = false;
             foreach (RaycastHit2D hit in ground)
             {

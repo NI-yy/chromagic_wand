@@ -6,9 +6,9 @@ public class EnemyProjectile : MonoBehaviour
 {
     EnemyProjectorData projectorData;
     Transform tf;
-    Player player;
+    protected Player player;
     Transform playerTF;
-    Vector3 playerPos;
+    protected Vector3 playerPos;
     Vector3 playerPosDiff;
     float projectileSpeed;
     float followPlayerSpeed;
