@@ -12,7 +12,7 @@ public class circlePainter : MonoBehaviour
     private Camera subCamera;
 
     [SerializeField]
-    private float scale;
+    public float scale;
     
     void Update()
     {
