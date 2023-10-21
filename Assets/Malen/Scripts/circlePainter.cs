@@ -17,7 +17,7 @@ public class circlePainter : MonoBehaviour
     void Update()
     {
         Transform playerPosition = player.transform;
-        gameObject.transform.position = playerPosition.position;
+        transform.position = playerPosition.position;
 
         subCamera.orthographicSize = scale;
         transform.localScale = new Vector3(scale, scale, scale);
