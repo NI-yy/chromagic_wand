@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     {
         public int maxHP = 1;
         public float moveSpeed;
-        [Header("UŒ‚—\’›‚ÌˆÊ’u")] public Vector2 attackSignalOffset=new Vector2(0,1);
+        [Header("æ”»æ’ƒäºˆå…†ã®ä½ç½®")] public Vector2 attackSignalOffset=new Vector2(0,1);
     }
     [SerializeField]
     protected EnemyStatus enemyStatus;
@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
 
 
 
-    /// <summary>dir‚ÍƒvƒŒƒCƒ„[‚ğ‘ÎÛ‚Æ‚µ‚È‚¢‚Ì‚İg—p</summary>
+    /// <summary>dirã¯ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’å¯¾è±¡ã¨ã—ãªã„æ™‚ã®ã¿ä½¿ç”¨</summary>
     public void StartFireProjectile(EnemyProjectorData data, Vector3 dir)
     {
         var p = Instantiate(projector, transform.position, Quaternion.identity);
