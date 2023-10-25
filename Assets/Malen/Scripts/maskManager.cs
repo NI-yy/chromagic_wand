@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class maskManager : MonoBehaviour
+public class MaskManager : MonoBehaviour
 {
     [SerializeField] bool isRedReleased;
     [SerializeField] bool isGreenReleased;
@@ -13,21 +13,13 @@ public class maskManager : MonoBehaviour
 
     [SerializeField] GameObject coloredImage;
     [SerializeField] Texture coloredTexture;
+
+    [SerializeField] Shader grayScaleShader;
      
     // Start is called before the first frame update
     void Start()
     {
-        Texture2D texture2D = new Texture2D(256, 256);
-
-        //Texture2DÇ©ÇÁSpriteÇçÏê¨
-        Sprite sprite = Sprite.Create(
-          texture: texture2D,
-          rect: new Rect(0, 0, texture2D.width, texture2D.height),
-          pivot: new Vector2(0.5f, 0.5f)
-        );
-
-        //ê∂ê¨ÇµÇΩSpriteÇSpriteRendererÇ…ê›íË
-        coloredImage.GetComponent<SpriteRenderer>().sprite = sprite;
+        
     }
 
     // Update is called once per frame
@@ -37,7 +29,7 @@ public class maskManager : MonoBehaviour
 
     }
 
-    private void setColorTileActive()
+    private void SetColorTileActive()
     {
         
     }
