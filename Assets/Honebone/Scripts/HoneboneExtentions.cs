@@ -15,4 +15,12 @@ public static class HoneboneExtentions
         return hit.collider != null && hit.collider.CompareTag(tagName);
     }
     
+    public static bool Dice(this float chance)
+    {
+        return Random.Range(0f, 100f) < chance;
+    }
+    public static bool Dice(this int chance)
+    {
+        return Random.Range(0f, 100f) < chance;
+    }
 }

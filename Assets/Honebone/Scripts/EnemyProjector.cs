@@ -27,6 +27,9 @@ public class EnemyProjector : MonoBehaviour
             //if (status.fireRate != 0 && status.SE_Fire != null) { soundManager.PlayAudio(status.SE_Fire); }
             if (data.fireRate > 0) { yield return wait; }
         }
+
+        Destroy(gameObject);
+
     }
     public void FireProjectile(EnemyProjectorData data, Vector3 dir)
     {
@@ -48,6 +51,5 @@ public class EnemyProjector : MonoBehaviour
             pjtl.transform.Rotate(new Vector3(0, 0, 1), spread);//ŠgŽU•ª‰ñ“]‚³‚¹‚é
         }
 
-        Destroy(gameObject);
     }
 }
