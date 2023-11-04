@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
     public float mass;
     [SerializeField]
     GameObject bulletPrefab;
+    public GameObject[] gameObjects;
 
 
 
@@ -199,6 +200,7 @@ public class Player : MonoBehaviour
             {
                 rb.velocity = new Vector2(0, rb.velocity.y);
             }
+
         }
 
     }
