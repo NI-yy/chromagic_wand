@@ -23,9 +23,11 @@ public class Player : MonoBehaviour
     private GameObject gameManagerObj;
     //private GameManager gameManagerScript;
     //private SoundManager soundManagerScript;
+    private PlayerHP playerHPControllerScript;
 
     public GroundCheck ground;
     public GroundCheck head;
+    public GameObject PlayerHPController;
 
 
     private Animator anim = null;
@@ -46,10 +48,9 @@ public class Player : MonoBehaviour
     private Vector3 initialPosition;
     private float jumpingTimeCount;
     public float mass;
-    [SerializeField]
-    GameObject bulletPrefab;
-    public GameObject[] gameObjects;
 
+    private string enemyTag = "Enemy";
+    private string bulletTag = "bullet";
 
 
 
@@ -71,6 +72,7 @@ public class Player : MonoBehaviour
         //gameManagerObj = GameObject.Find("GameManager");
         //gameManagerScript = gameManagerObj.GetComponent<GameManager>();
         //soundManagerScript = gameManagerObj.GetComponent<SoundManager>();
+        playerHPControllerScript = PlayerHPController.GetComponent<PlayerHP>();
     }
 
 
@@ -145,7 +147,21 @@ public class Player : MonoBehaviour
         spaceKeyDown = false;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(enemyTag))
+        {
+            playerHPControllerScript.ReduceHP();
+        }
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(bulletTag))
+        {
+            playerHPControllerScript.ReduceHP();
+        }
+    }
 
 
 
@@ -288,7 +304,6 @@ public class Player : MonoBehaviour
 
     private void Attack()
     {
-        Vector3 pos = transform.position + new Vector3(0.5f, -0.5f, 0);
-        Instantiate(bulletPrefab, pos, Quaternion.identity);
+        anim.SetBool("Attack", true);
     }
 }
