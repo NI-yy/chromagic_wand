@@ -4,14 +4,17 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Rendering.PostProcessing;
 
-public class fetchColor : MonoBehaviour
+public class FetchColor : MonoBehaviour
 {
 
     private bool fetchFlag = false;
     private Tween circleAnimation;
     private CirclePainter painter;
+    [Header("色吸いモードの最大半径")]
     [SerializeField] float radiusMax;
+    [Header("メインカメラ全体を覆う半径")]
     [SerializeField] float radiusCoverScreenAll;
+    [Header("色吸いモード移行にかかる時間(s)")]
     [SerializeField] float duration;
     [SerializeField] PostProcessLayer PPL;
 
