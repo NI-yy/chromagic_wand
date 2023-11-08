@@ -11,7 +11,7 @@ public class CirclePainter : MonoBehaviour
     [SerializeField]
     private Camera subCamera;
 
-    [SerializeField]
+    [HideInInspector]
     public float scale;
     
     void Update()
