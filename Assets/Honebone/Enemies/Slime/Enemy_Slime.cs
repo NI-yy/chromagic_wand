@@ -31,7 +31,7 @@ public class Enemy_Slime : Enemy
     bool attack;
     int jumpCount;
 
-    string wandTag = "wand";
+    //string wandTag = "wand";
     // Start is called before the first frame update
     void Start()
     {
@@ -116,13 +116,13 @@ public class Enemy_Slime : Enemy
         jumped = true;
     }
 
-    //yy編集_プレイヤーの攻撃(杖)が当たった場合消滅
+    ////yy編集_プレイヤーの攻撃(杖)が当たった場合消滅
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag(wandTag))
-        {
-            Destroy(this.gameObject);
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag(wandTag))
+    //    {
+    //        Destroy(this.gameObject);
+    //    }
+    //}
 }
