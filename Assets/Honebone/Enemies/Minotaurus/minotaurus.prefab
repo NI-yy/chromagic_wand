@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 689490962260800086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 97.74, y: -4.74, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 1}
+  m_LocalScale: {x: 18, y: 18, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -103,21 +103,21 @@ MonoBehaviour:
   projector: {fileID: 3801495604474907351, guid: ad7ccf4eb4cfec04fb69e71793dd9385, type: 3}
   enemyStatus:
     maxHP: 1
-    moveSpeed: 3
+    moveSpeed: 9
     attackSignalOffset: {x: 0, y: 1}
   groundCheck: {fileID: 0}
-  engageRange: 17
-  disengageRange: 25
-  attackRange: 14
+  engageRange: 68
+  disengageRange: 100
+  attackRange: 56
   attackDelayTime: 1
   attackIntervalTime: 4
   shockWave: {fileID: 2923133494883976015, guid: 89dc29d2964bf1643bd9b378392d5311, type: 3}
   shockWaveStartDistance: 3
   shockWaveAmount: 40
   shockCycleTime: 0.05
-  shockWaveGap: 0.75
-  groundCheckHeight: 3
-  groundCheckRange: 5
+  shockWaveGap: 2.25
+  groundCheckHeight: 9
+  groundCheckRange: 15
 --- !u!61 &6328411375460620882
 BoxCollider2D:
   m_ObjectHideFlags: 0

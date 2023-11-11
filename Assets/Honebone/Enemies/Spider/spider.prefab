@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4397231123756064548}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 43.618984, y: -0.109699786, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 1}
+  m_LocalScale: {x: 18, y: 18, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -104,15 +104,15 @@ MonoBehaviour:
   projector: {fileID: 3801495604474907351, guid: ad7ccf4eb4cfec04fb69e71793dd9385, type: 3}
   enemyStatus:
     maxHP: 1
-    moveSpeed: 6
+    moveSpeed: 18
     attackSignalOffset: {x: 0, y: 1}
   groundCheck: {fileID: 0}
   ceilingHitRange: 10000
   moveTime_min: 1
   moveTime_max: 2
-  groundHitRange: 2
+  groundHitRange: 6
   attackInterval: 3
-  attackRange: 10
+  attackRange: 45
   searchDuration: 2
   attackDelayTime: 0.75
   attackIntervalTime: 1
@@ -241,8 +241,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.08701706
-        value: 0.059408575
+        time: 0.04972458
+        value: 0.52475584
         inSlope: 0
         outSlope: 0
         tangentMode: 0

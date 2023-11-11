@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1300121455
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0c31b2b80df984ead04aaf173ee34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectorData: {fileID: 11400000, guid: fa7d90c721a32a543949b53c72360d1a, type: 2}
+  shrapnel: {fileID: 11400000, guid: cb1752218d796774792cd1bacc460d98, type: 2}
   projector: {fileID: 3801495604474907351, guid: ad7ccf4eb4cfec04fb69e71793dd9385, type: 3}
 --- !u!58 &785933244234800232
 CircleCollider2D:

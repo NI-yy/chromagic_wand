@@ -5,12 +5,12 @@ using UnityEngine;
 public class EPJTL_ArtilleryShell : EnemyProjectile
 {
     [SerializeField]
-    EnemyProjectorData projectorData;
+    EnemyProjectorData shrapnel;
     [SerializeField]
     GameObject projector;
     public override void AtTheEnd(bool expired)
     {
         var p = Instantiate(projector, transform.position, Quaternion.identity);
-        p.GetComponent<EnemyProjector>().Init(projectorData, new Vector3(), playerPos, player);
+        p.GetComponent<EnemyProjector>().Init(shrapnel, new Vector3(), playerPos, player);
     }
 }

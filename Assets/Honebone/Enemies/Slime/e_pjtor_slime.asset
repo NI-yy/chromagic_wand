@@ -25,6 +25,6 @@ MonoBehaviour:
   equidistant: 1
   fireRounds: 1
   fireRate: 0
-  projectileSpeed_min: 5
-  projectileSpeed_max: 5
-  projectileDuration: 6
+  projectileSpeed_min: 15
+  projectileSpeed_max: 15
+  projectileDuration: 3

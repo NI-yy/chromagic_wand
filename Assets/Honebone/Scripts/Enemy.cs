@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     {
         public int maxHP = 1;
         public float moveSpeed;
-        [Header("攻撃予兆の位置")] public Vector2 attackSignalOffset=new Vector2(0,1);
+        [Header("攻撃予兆の位置")] public Vector2 attackSignalOffset=new Vector2(0,3);
     }
     [SerializeField]
     protected EnemyStatus enemyStatus;
@@ -42,6 +42,15 @@ public class Enemy : MonoBehaviour
 
     }
 
+    string wandTag = "wand";
+    private void OnTriggerEnter2D(Collider2D collision)//被ダメ時処理
+    {
+        if (collision.gameObject.CompareTag(wandTag))
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
 
     public void Signal()
     {
@@ -62,11 +71,16 @@ public class Enemy : MonoBehaviour
         var p = Instantiate(projector, transform.position, Quaternion.identity);
         p.GetComponent<EnemyProjector>().Init(data, dir, GetPlayerPos(), player);
     }
-   
 
 
-    public Vector3 GetPlayerPos() { return PlayerTF.position; }
-    public Vector3 GetPlayerDir() { return (PlayerTF.position - transform.position).normalized; }
+
+    public Vector3 GetPlayerPos()
+    {
+        Vector3 pos = PlayerTF.position;
+        pos.y += 7.5f;//応急処置
+        return pos;
+    }
+    public Vector3 GetPlayerDir() { return (GetPlayerPos() - transform.position).normalized; }
     public Vector2 GetPlayerDir_Horizontal() { return new Vector2(GetPlayerDir().x, 0).normalized; }
-    public float GetPlayerDistance() { return (PlayerTF.position - transform.position).magnitude; }
+    public float GetPlayerDistance() { return (GetPlayerPos() - transform.position).magnitude; }
 }

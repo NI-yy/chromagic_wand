@@ -75,13 +75,14 @@ public class Enemy_ThornMage : Enemy
     IEnumerator Attack()
     {
         Vector3 attackPos = new Vector3();
-        RaycastHit2D[] ground = Physics2D.RaycastAll(GetPlayerPos(), Vector2.down, 20);
+        RaycastHit2D[] ground = Physics2D.RaycastAll(GetPlayerPos(), Vector2.down, 60);
+        Debug.DrawRay(GetPlayerPos(), Vector2.down * 60, Color.gray, 1f);
         foreach (RaycastHit2D hit in ground)
         {
             if (hit.CheckRaycastHit("Ground"))
             {
                 attackPos = hit.point;
-                attackPos.y += 1;
+                attackPos.y += 3;
                 Instantiate(attackSignal, attackPos, Quaternion.identity);
                 break;
             }

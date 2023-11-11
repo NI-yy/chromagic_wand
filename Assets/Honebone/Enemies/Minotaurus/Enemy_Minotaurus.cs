@@ -117,7 +117,7 @@ public class Enemy_Minotaurus : Enemy
                 if (hit.CheckRaycastHit("Ground"))
                 {
                     attackPos = hit.point;
-                    attackPos.y += 1.25f;
+                    attackPos.y += 3.75f;
                     Instantiate(shockWave, attackPos, Quaternion.identity);//çUåÇÇÃê∂ê¨
 
                     raycastPos.x += shockWaveMove;
