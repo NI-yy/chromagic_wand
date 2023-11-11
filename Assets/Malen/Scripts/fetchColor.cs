@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Rendering.PostProcessing;
+using Cinemachine;
 
 public class FetchColor : MonoBehaviour
 {
 
     private bool fetchFlag = false;
+    private float size;
     private Tween circleAnimation;
     private CirclePainter painter;
     [Header("色吸いモードの最大半径")]
@@ -17,10 +19,12 @@ public class FetchColor : MonoBehaviour
     [Header("色吸いモード移行にかかる時間(s)")]
     [SerializeField] float duration;
     [SerializeField] PostProcessLayer PPL;
+    [SerializeField] CinemachineVirtualCamera cinemachine;
 
     private void Start()
     {
         painter = GetComponent<CirclePainter>();
+        size = 2 * cinemachine.m_Lens.OrthographicSize;
     }
 
     // Update is called once per frame
