@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     [Header("ジャンプ最低高度")] public float jumpHeightMin;
     [Header("ジャンプ最高高度")] public float jumpHeightMax;
     [Header("ジャンプ最大時間")] public float jumpTimeMax;
+    [Header("2段ジャンプ")] public bool beAbleToDoubleJump;
 
     //public GameObject canvasGame;
 
@@ -49,10 +50,13 @@ public class Player : MonoBehaviour
     private float jumpingTimeCount;
     public float mass;
 
+    //敵からの攻撃判定関係
     private string enemyTag = "Enemy";
     private string bulletTag = "bullet";
+    private float initialForce;
 
-
+    //2段ジャンプ関係
+    private bool afterFirstJump = false; //1回ジャンプした後かどうか。これがtrueの時のみ2段ジャンプ可能
 
 
 
@@ -273,8 +277,11 @@ public class Player : MonoBehaviour
 
     private void ManageYMoveGround()
     {
-        float initialForce = Mathf.Sqrt(gravity * jumpHeightMin * 2) * mass;
+        //2段ジャンプのために変数のスコープ変更_yy
+        //float initialForce = Mathf.Sqrt(gravity * jumpHeightMin * 2) * mass;
+        initialForce = Mathf.Sqrt(gravity * jumpHeightMin * 2) * mass;
 
+        //地面上でスペースキーが押下されたとき、上方向に力を加えることでジャンプする.同時に時間計測が始まる
         if (spaceKeyDown)
         {
             //Debug.Log("jump");
@@ -282,6 +289,7 @@ public class Player : MonoBehaviour
             jumpingTimeCount = 0f;
             //anim.SetBool("jumping", true);
             //soundManagerScript.PlayOneShot(0);
+            afterFirstJump = true;
         }
 
         rb.AddForce(new Vector2(0, -1) * gravity);
@@ -297,6 +305,15 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(new Vector2(0, 1) * jumpingForce);
             jumpingTimeCount += Time.deltaTime;
+        }
+        else if (spaceKeyDown && afterFirstJump && beAbleToDoubleJump)
+        {
+            //Debug.Log("jump");
+            rb.AddForce(new Vector2(0, 1) * initialForce, ForceMode2D.Impulse);
+            jumpingTimeCount = 0f;
+            //anim.SetBool("jumping", true);
+            //soundManagerScript.PlayOneShot(0);
+            afterFirstJump = false;
         }
 
         rb.AddForce(new Vector2(0, -1) * gravity);
