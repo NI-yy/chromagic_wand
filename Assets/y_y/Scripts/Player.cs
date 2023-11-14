@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 //using Cinemachine;
 using KoitanLib;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class Player : MonoBehaviour
     public GroundCheck ground;
     public GroundCheck head;
     public GameObject PlayerHPController;
+    public GameObject UI_ColorOrb;
+    public GameObject bullet;
+    public GameObject TwoPlayerManager;
 
 
     private Animator anim = null;
@@ -58,6 +62,9 @@ public class Player : MonoBehaviour
     //2段ジャンプ関係
     private bool afterFirstJump = false; //1回ジャンプした後かどうか。これがtrueの時のみ2段ジャンプ可能
 
+    //攻撃色関係
+    private TwoPlayerManager twoPlayerManagerScript;
+
 
 
 
@@ -77,6 +84,8 @@ public class Player : MonoBehaviour
         //gameManagerScript = gameManagerObj.GetComponent<GameManager>();
         //soundManagerScript = gameManagerObj.GetComponent<SoundManager>();
         playerHPControllerScript = PlayerHPController.GetComponent<PlayerHP>();
+
+        twoPlayerManagerScript = TwoPlayerManager.GetComponent<TwoPlayerManager>();
     }
 
 
@@ -140,7 +149,7 @@ public class Player : MonoBehaviour
             spaceKeyDown = true;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (KoitanInput.GetDown(ButtonCode.B) || Input.GetMouseButtonDown(0))
         {
             Attack();
         }
@@ -321,6 +330,12 @@ public class Player : MonoBehaviour
 
     private void Attack()
     {
+        Color color_wand = UI_ColorOrb.GetComponent<Image>().color;
+        string wandColorString = twoPlayerManagerScript.GetWandColor();
+        Debug.Log("杖の色: " + wandColorString);
+        GameObject currentBullet = Instantiate(bullet, this.transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+        currentBullet.GetComponent<SpriteRenderer>().color = color_wand;
+        currentBullet.GetComponent<bulletController>().SetBulletColor(wandColorString);
         anim.SetBool("Attack", true);
     }
 }
