@@ -10,7 +10,7 @@ public class bulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
     }
 
     public void SetBulletColor(string wand_color)
