@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
-public class circlePainter : MonoBehaviour
+public class CirclePainter : MonoBehaviour
 {
 
     [SerializeField]
@@ -11,7 +12,7 @@ public class circlePainter : MonoBehaviour
     [SerializeField]
     private Camera subCamera;
 
-    [SerializeField]
+    [HideInInspector]
     public float scale;
     
     void Update()
@@ -21,6 +22,5 @@ public class circlePainter : MonoBehaviour
 
         subCamera.orthographicSize = scale;
         transform.localScale = new Vector3(scale, scale, scale);
-
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy_SpitPlant : Enemy
 {
     [SerializeField]
-    float range = 10;
+    float range = 10;//検知範囲
     [SerializeField]
     float attackDelayTime;
     [SerializeField]
@@ -16,7 +16,6 @@ public class Enemy_SpitPlant : Enemy
     Vector3 direction;
 
     bool interval;
-    // Start is called before the first frame update
     void Start()
     {
         Init();
@@ -24,20 +23,18 @@ public class Enemy_SpitPlant : Enemy
         direction = GetPlayerDir();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        origin = transform.position;
-        direction = GetPlayerDir();
-        RaycastHit2D hit2D = Physics2D.Raycast(origin, direction,range);
-        Debug.DrawRay(origin, direction * range, Color.red);
-        if (!interval && hit2D.collider!=null)
+        origin = transform.position;//originに自身の座標を代入
+        direction = GetPlayerDir();//directionに自身からプレイヤーに向かう単位ベクトルを代入
+        RaycastHit2D hit2D = Physics2D.Raycast(origin, direction, range);//Raycastして検知したObjectをhit2Dに代入
+        Debug.DrawRay(origin, direction * range, Color.red);//Rayと同じ始点、方向、長さの赤い線を1フレーム描画
+
+        //攻撃後一定時間が経っている かつ Raycstでタグが"Player"であるObjectを検知した
+        if (!interval && hit2D.CheckRaycastHit("Player"))
         {
-            if (hit2D.collider.CompareTag("Player"))
-            {
-                interval = true;
-                StartCoroutine(Attack());
-            }
+            interval = true;
+            StartCoroutine(Attack());
         }
 
         SetSpriteFlip();

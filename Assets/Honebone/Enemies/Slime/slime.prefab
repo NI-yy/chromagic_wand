@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1759172047620137538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.7, y: -4.45, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1447324353708558992}
@@ -109,13 +109,13 @@ MonoBehaviour:
     attackSignalOffset: {x: 0, y: 1}
   groundCheck: {fileID: 5486468423528659203}
   jumpIntervalTime: 1.5
-  jumpHeight: 8
-  jumpAngel: 60
+  jumpHeight: 12
+  jumpAngel: 75
   doesAttack: 1
   attackInterval: 3
   attackDelayTime: 1
-  attackHeight: 11
-  attackAngel: 75
+  attackHeight: 16
+  attackAngel: 80
   projectorData: {fileID: 11400000, guid: b91727740f4826f4888a45cb9d357d39, type: 2}
 --- !u!61 &942636865532734005
 BoxCollider2D:
@@ -126,7 +126,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1759172047620137538}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5490de23b25315b48a2d5f93cb52173d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

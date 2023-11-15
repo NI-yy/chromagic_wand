@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 //using Cinemachine;
 using KoitanLib;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -17,15 +18,21 @@ public class Player : MonoBehaviour
     [Header("ジャンプ最低高度")] public float jumpHeightMin;
     [Header("ジャンプ最高高度")] public float jumpHeightMax;
     [Header("ジャンプ最大時間")] public float jumpTimeMax;
+    [Header("2段ジャンプ")] public bool beAbleToDoubleJump;
 
     //public GameObject canvasGame;
 
     private GameObject gameManagerObj;
     //private GameManager gameManagerScript;
     //private SoundManager soundManagerScript;
+    private PlayerHP playerHPControllerScript;
 
     public GroundCheck ground;
     public GroundCheck head;
+    public GameObject PlayerHPController;
+    public GameObject UI_ColorOrb;
+    public GameObject bullet;
+    public GameObject TwoPlayerManager;
 
 
     private Animator anim = null;
@@ -46,11 +53,17 @@ public class Player : MonoBehaviour
     private Vector3 initialPosition;
     private float jumpingTimeCount;
     public float mass;
-    [SerializeField]
-    GameObject bulletPrefab;
 
+    //敵からの攻撃判定関係
+    private string enemyTag = "Enemy";
+    private string bulletTag = "bullet";
+    private float initialForce;
 
+    //2段ジャンプ関係
+    private bool afterFirstJump = false; //1回ジャンプした後かどうか。これがtrueの時のみ2段ジャンプ可能
 
+    //攻撃色関係
+    private TwoPlayerManager twoPlayerManagerScript;
 
 
 
@@ -70,6 +83,9 @@ public class Player : MonoBehaviour
         //gameManagerObj = GameObject.Find("GameManager");
         //gameManagerScript = gameManagerObj.GetComponent<GameManager>();
         //soundManagerScript = gameManagerObj.GetComponent<SoundManager>();
+        playerHPControllerScript = PlayerHPController.GetComponent<PlayerHP>();
+
+        twoPlayerManagerScript = TwoPlayerManager.GetComponent<TwoPlayerManager>();
     }
 
 
@@ -133,7 +149,7 @@ public class Player : MonoBehaviour
             spaceKeyDown = true;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (KoitanInput.GetDown(ButtonCode.B) || Input.GetMouseButtonDown(0))
         {
             Attack();
         }
@@ -144,7 +160,21 @@ public class Player : MonoBehaviour
         spaceKeyDown = false;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(enemyTag))
+        {
+            playerHPControllerScript.ReduceHP();
+        }
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(bulletTag))
+        {
+            playerHPControllerScript.ReduceHP();
+        }
+    }
 
 
 
@@ -199,6 +229,7 @@ public class Player : MonoBehaviour
             {
                 rb.velocity = new Vector2(0, rb.velocity.y);
             }
+
         }
 
     }
@@ -255,8 +286,11 @@ public class Player : MonoBehaviour
 
     private void ManageYMoveGround()
     {
-        float initialForce = Mathf.Sqrt(gravity * jumpHeightMin * 2) * mass;
+        //2段ジャンプのために変数のスコープ変更_yy
+        //float initialForce = Mathf.Sqrt(gravity * jumpHeightMin * 2) * mass;
+        initialForce = Mathf.Sqrt(gravity * jumpHeightMin * 2) * mass;
 
+        //地面上でスペースキーが押下されたとき、上方向に力を加えることでジャンプする.同時に時間計測が始まる
         if (spaceKeyDown)
         {
             //Debug.Log("jump");
@@ -264,6 +298,7 @@ public class Player : MonoBehaviour
             jumpingTimeCount = 0f;
             //anim.SetBool("jumping", true);
             //soundManagerScript.PlayOneShot(0);
+            afterFirstJump = true;
         }
 
         rb.AddForce(new Vector2(0, -1) * gravity);
@@ -280,13 +315,28 @@ public class Player : MonoBehaviour
             rb.AddForce(new Vector2(0, 1) * jumpingForce);
             jumpingTimeCount += Time.deltaTime;
         }
+        else if ((spaceKeyDown || KoitanInput.GetDown(ButtonCode.A)) && afterFirstJump && beAbleToDoubleJump)
+        {
+            //2段ジャンプ
+            //Debug.Log("jump");
+            rb.AddForce(new Vector2(0, 1) * initialForce, ForceMode2D.Impulse);
+            jumpingTimeCount = 0f;
+            //anim.SetBool("jumping", true);
+            //soundManagerScript.PlayOneShot(0);
+            afterFirstJump = false;
+        }
 
         rb.AddForce(new Vector2(0, -1) * gravity);
     }
 
     private void Attack()
     {
-        Vector3 pos = transform.position + new Vector3(0.5f, -0.5f, 0);
-        Instantiate(bulletPrefab, pos, Quaternion.identity);
+        Color color_wand = UI_ColorOrb.GetComponent<Image>().color;
+        string wandColorString = twoPlayerManagerScript.GetWandColor();
+        Debug.Log("杖の色: " + wandColorString);
+        GameObject currentBullet = Instantiate(bullet, this.transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+        currentBullet.GetComponent<SpriteRenderer>().color = color_wand;
+        currentBullet.GetComponent<bulletController>().SetBulletColor(wandColorString);
+        anim.SetBool("Attack", true);
     }
 }
