@@ -23,4 +23,15 @@ public static class HoneboneExtentions
     {
         return Random.Range(0f, 100f) < chance;
     }
+
+    public static string ToStr(this TwoPlayerManager.WandColor color)
+    {
+        Dictionary<TwoPlayerManager.WandColor, string> dic = new Dictionary<TwoPlayerManager.WandColor, string>() {
+            {TwoPlayerManager.WandColor.White,"White" },{TwoPlayerManager.WandColor.Orange,"Orange" },{TwoPlayerManager.WandColor.Yellow,"Yellow" },
+            {TwoPlayerManager.WandColor.Green,"Green" },{TwoPlayerManager.WandColor.Blue,"Blue" },{TwoPlayerManager.WandColor.Purple,"Purple" },
+            {TwoPlayerManager.WandColor.Red,"Red" },{TwoPlayerManager.WandColor.Black,"Black" },{TwoPlayerManager.WandColor.Other,"Other" }
+
+        };
+        return dic[color];
+    }
 }

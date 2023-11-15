@@ -42,13 +42,9 @@ public class Enemy : MonoBehaviour
 
     }
 
-    string wandTag = "wand";
-    private void OnTriggerEnter2D(Collider2D collision)//被ダメ時処理
+    public void HitAttack()
     {
-        if (collision.gameObject.CompareTag(wandTag))
-        {
-            Destroy(this.gameObject);
-        }
+        Destroy(this.gameObject);//test
     }
 
 

@@ -34,6 +34,11 @@ public class Player : MonoBehaviour
     public GameObject bullet;
     public GameObject TwoPlayerManager;
 
+    //honebone追加
+    bool lookRight;
+    public GameObject projector;
+    public PlayerProjectorData projectorData;
+
 
     private Animator anim = null;
     private Rigidbody2D rb = null;
@@ -168,13 +173,15 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag(bulletTag))
-        {
-            playerHPControllerScript.ReduceHP();
-        }
-    }
+
+    //honebone : 自分が出した弾にあたって速攻GameOverになるのでいったんコメントアウトしてます
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag(bulletTag))
+    //    {
+    //        playerHPControllerScript.ReduceHP();
+    //    }
+    //}
 
 
 
@@ -194,6 +201,7 @@ public class Player : MonoBehaviour
         {
             anim.SetBool("running", true);
             transform.localScale = newScale;
+            lookRight = true;
 
             //x方向に加速度*質量の力を加える
             rb.AddForce(new Vector2(1, 0) * accelerationGround * mass);
@@ -208,6 +216,7 @@ public class Player : MonoBehaviour
             //左右の向きを変える
             newScale.x = -newScale.x;
             transform.localScale = newScale;
+            lookRight = false;
 
 
             //-x方向に加速度*質量の力を加える
@@ -246,6 +255,7 @@ public class Player : MonoBehaviour
         if (horizontalKeyRaw > deadZone)
         {
             transform.localScale = newScale;
+            lookRight = true;
 
             //x方向に加速度*質量の力を加える
             rb.AddForce(new Vector2(1, 0) * accelerationAir * mass);
@@ -260,6 +270,7 @@ public class Player : MonoBehaviour
             //左右の向きを変える
             newScale.x = -newScale.x;
             transform.localScale = newScale;
+            lookRight = false;
 
 
             //-x方向に加速度*質量の力を加える
@@ -332,11 +343,17 @@ public class Player : MonoBehaviour
     private void Attack()
     {
         Color color_wand = UI_ColorOrb.GetComponent<Image>().color;
-        string wandColorString = twoPlayerManagerScript.GetWandColor();
+        string wandColorString = twoPlayerManagerScript.GetWandColor().ToStr();
         Debug.Log("杖の色: " + wandColorString);
-        GameObject currentBullet = Instantiate(bullet, this.transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
-        currentBullet.GetComponent<SpriteRenderer>().color = color_wand;
-        currentBullet.GetComponent<bulletController>().SetBulletColor(wandColorString);
+        //GameObject currentBullet = Instantiate(bullet, this.transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+        //currentBullet.GetComponent<SpriteRenderer>().color = color_wand;
+        //currentBullet.GetComponent<bulletController>().SetBulletColor(wandColorString);
+
+        Vector3 dir = Vector3.right;
+        if (!lookRight) { dir = Vector3.left; }
+        var p = Instantiate(projector, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+        p.GetComponent<PlayerProjector>().Init(projectorData, dir,color_wand);
+
         anim.SetBool("Attack", true);
     }
 }
