@@ -117,7 +117,8 @@ public class TwoPlayerManager : MonoBehaviour
             {
                 if(0 <= h && h < 45)
                 {
-                    return "Orange";
+                    //return "Orange";
+                    return "Red";
                 }
                 else if(45 <= h && h < 75)
                 {

@@ -315,8 +315,9 @@ public class Player : MonoBehaviour
             rb.AddForce(new Vector2(0, 1) * jumpingForce);
             jumpingTimeCount += Time.deltaTime;
         }
-        else if (spaceKeyDown && afterFirstJump && beAbleToDoubleJump)
+        else if ((spaceKeyDown || KoitanInput.GetDown(ButtonCode.A)) && afterFirstJump && beAbleToDoubleJump)
         {
+            //2’iƒWƒƒƒ“ƒv
             //Debug.Log("jump");
             rb.AddForce(new Vector2(0, 1) * initialForce, ForceMode2D.Impulse);
             jumpingTimeCount = 0f;
