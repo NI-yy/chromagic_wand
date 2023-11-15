@@ -104,13 +104,12 @@ public class TwoPlayerManager : MonoBehaviour
         return (value - fromMin) / (fromMax - fromMin) * (toMax - toMin) + toMin;
     }
 
-    public enum WandColor { Other,White, Orange, Yellow, Green, Blue, Purple, Red, Black }
     //Ô, ò, ‰©, —Î, Â, ‡, ”’, •‚ğ¯•Ê
-    public WandColor GetWandColor()
+    public string GetWandColor()
     {
         if (wand_init)
         {
-            return WandColor.White;
+            return "White";
         }
         else
         {
@@ -118,40 +117,40 @@ public class TwoPlayerManager : MonoBehaviour
             {
                 if(0 <= h && h < 45)
                 {
-                    //return "Orange";
-                    return WandColor.Red;
+                    return "Orange";
+                    //return "Red";
                 }
                 else if(45 <= h && h < 75)
                 {
-                    return WandColor.Yellow;
+                    return "Yellow";
                 }
                 else if (75 <= h && h < 165)
                 {
-                    return WandColor.Green;
+                    return "Green";
                 }
                 else if (165 <= h && h < 270)
                 {
-                    return WandColor.Blue;
+                    return "Blue";
                 }
                 else if (270 <= h && h < 310)
                 {
-                    return WandColor.Purple;
+                    return "Purple";
                 }
                 else if (310 <= h && h < 360)
                 {
-                    return WandColor.Red;
+                    return "Red";
                 }
             }
             else if(v < 50)
             {
-                return WandColor.Black;
+                return "Black";
             }
             else
             {
-                return WandColor.White;
+                return "White";
             }
         }
 
-        return WandColor.Other;
+        return null;
     }
 }
