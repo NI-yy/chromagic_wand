@@ -353,6 +353,7 @@ public class Player : MonoBehaviour
         if (!lookRight) { dir = Vector3.left; }
         var p = Instantiate(projector, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
         p.GetComponent<PlayerProjector>().Init(projectorData, dir,color_wand);
+        p.GetComponent<bulletController>().SetBulletColor(wandColorString);
 
         anim.SetBool("Attack", true);
     }

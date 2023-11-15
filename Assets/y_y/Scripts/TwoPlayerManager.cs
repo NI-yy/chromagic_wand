@@ -24,6 +24,8 @@ public class TwoPlayerManager : MonoBehaviour
     private float h, s, v;
     private bool enableBird = true;
 
+    public enum WandColor { Other, White, Orange, Yellow, Green, Blue, Purple, Red, Black }
+
     private void Start()
     {
         
@@ -105,52 +107,52 @@ public class TwoPlayerManager : MonoBehaviour
     }
 
     //Ô, žò, ‰©, —Î, Â, Ž‡, ”’, •‚ðŽ¯•Ê
-    public string GetWandColor()
+    public WandColor GetWandColor()
     {
         if (wand_init)
         {
-            return "White";
+            return WandColor.White;
         }
         else
         {
-            if(s >= 50 && v >= 50)
+            if (s >= 50 && v >= 50)
             {
-                if(0 <= h && h < 45)
+                if (0 <= h && h < 45)
                 {
-                    return "Orange";
-                    //return "Red";
+                    //return "Orange";
+                    return WandColor.Red;
                 }
-                else if(45 <= h && h < 75)
+                else if (45 <= h && h < 75)
                 {
-                    return "Yellow";
+                    return WandColor.Yellow;
                 }
                 else if (75 <= h && h < 165)
                 {
-                    return "Green";
+                    return WandColor.Green;
                 }
                 else if (165 <= h && h < 270)
                 {
-                    return "Blue";
+                    return WandColor.Blue;
                 }
                 else if (270 <= h && h < 310)
                 {
-                    return "Purple";
+                    return WandColor.Purple;
                 }
                 else if (310 <= h && h < 360)
                 {
-                    return "Red";
+                    return WandColor.Red;
                 }
             }
-            else if(v < 50)
+            else if (v < 50)
             {
-                return "Black";
+                return WandColor.Black;
             }
             else
             {
-                return "White";
+                return WandColor.White;
             }
         }
 
-        return null;
+        return WandColor.Other;
     }
 }
