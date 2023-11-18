@@ -345,15 +345,14 @@ public class Player : MonoBehaviour
         Color color_wand = UI_ColorOrb.GetComponent<Image>().color;
         string wandColorString = twoPlayerManagerScript.GetWandColor().ToStr();
         Debug.Log("èÒÇÃêF: " + wandColorString);
-        //GameObject currentBullet = Instantiate(bullet, this.transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
-        //currentBullet.GetComponent<SpriteRenderer>().color = color_wand;
-        //currentBullet.GetComponent<bulletController>().SetBulletColor(wandColorString);
+        GameObject currentBullet = Instantiate(bullet, this.transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+        currentBullet.GetComponent<SpriteRenderer>().color = color_wand;
+        currentBullet.GetComponent<bulletController>().SetBulletColor(wandColorString);
 
         Vector3 dir = Vector3.right;
         if (!lookRight) { dir = Vector3.left; }
         var p = Instantiate(projector, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
         p.GetComponent<PlayerProjector>().Init(projectorData, dir,color_wand);
-        p.GetComponent<bulletController>().SetBulletColor(wandColorString);
 
         anim.SetBool("Attack", true);
     }

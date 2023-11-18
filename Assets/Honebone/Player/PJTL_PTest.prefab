@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2655755867106149723}
   - component: {fileID: 8447660076012167497}
   - component: {fileID: -6748680209917733133}
-  - component: {fileID: 4145671266927225109}
   m_Layer: 0
   m_Name: PJTL_PTest
   m_TagString: bullet
@@ -162,16 +161,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4145671266927225109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5528791988881603610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdb0eb06cf6183c4abec550dda1788a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
