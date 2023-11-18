@@ -545,7 +545,7 @@ GameObject:
   - component: {fileID: 230696497}
   - component: {fileID: 230696496}
   m_Layer: 0
-  m_Name: RedCupsule
+  m_Name: OrangeCupsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2777,6 +2777,8 @@ MonoBehaviour:
   UI_ColorOrb: {fileID: 1474229819}
   bullet: {fileID: 5528791988881603610, guid: d9d9b4a1f55ea6b4ebffbc088dabd76d, type: 3}
   TwoPlayerManager: {fileID: 188703382}
+  projector: {fileID: 0}
+  projectorData: {fileID: 0}
   mass: 1
 --- !u!50 &1137102530
 Rigidbody2D:
