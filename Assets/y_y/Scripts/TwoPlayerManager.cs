@@ -129,8 +129,8 @@ public class TwoPlayerManager : MonoBehaviour
             {
                 if (0 <= h && h < 45)
                 {
-                    //return "Orange";
-                    return WandColor.Red;
+                    return WandColor.Orange;
+                    //return WandColor.Red;
                 }
                 else if (45 <= h && h < 75)
                 {
