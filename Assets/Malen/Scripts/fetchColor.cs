@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Rendering.PostProcessing;
 using Cinemachine;
+using KoitanLib;
 
 public class FetchColor : MonoBehaviour
 {
@@ -30,14 +31,15 @@ public class FetchColor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        //Rボタンで色吸いモードになるように変更(yy)
+        if (Input.GetMouseButtonDown(0) || KoitanInput.GetDown(ButtonCode.RB))
         {
             if (painter.scale == 0f)
                 painter.scale = radiusCoverScreenAll;
             ChangeAnimation(true);
             PPL.enabled = true;
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) || KoitanInput.GetUp(ButtonCode.RB))
         {
             ChangeAnimation(false);
             Time.timeScale = 1f;
