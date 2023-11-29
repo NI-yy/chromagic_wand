@@ -38,7 +38,9 @@ public class TitleManager : MonoBehaviour
 
     public void OnClickStartButton()
     {
-        SceneManager.LoadScene("SampleScene");
+        //ロードするシーンを変更(yy)
+        //SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("GameScene_yy");
     }
 
     public void OnClickEndButton()

@@ -6,12 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/kashi/Scenes/Title.unity
+    guid: ca645b7719c510246a267b5621ed031d
   - enabled: 1
-    path: Assets/y_y/Scenes/BlackAndWhite_Square.unity
-    guid: 76a89c0d1d1355f42a1debc382323e77
-  - enabled: 1
-    path: Assets/y_y/Scenes/BlackAndWhite_1_1.unity
-    guid: 569561702d6b5fc409b8050179ae29d3
+    path: Assets/y_y/Scenes/GameScene_yy.unity
+    guid: ad9c587ea98a8a44da8f85f3fae5ea95
   m_configObjects: {}
