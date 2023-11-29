@@ -13,19 +13,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 7
---- !u!114 &-714174359737103455
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 0
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -33,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: eff_mat_slash_001
-  m_Shader: {fileID: -6465566751694194690, guid: eb168f8db3c8b44b99936abd8d336b6f, type: 3}
+  m_Name: eff_mat_slash_w_003
+  m_Shader: {fileID: -6465566751694194690, guid: c05ec0958ab724ccc9f542c6dee05fd5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -90,19 +77,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SlashTex:
-        m_Texture: {fileID: 2800000, guid: 83ad9eb42523841be9076351fa6c67ea, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture2DAsset_59b5a43940ce4d1190fcfa1f4028e7a6_Out_0_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 83ad9eb42523841be9076351fa6c67ea, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture2DAsset_5baa01faa7e2478ba30ff33a81f15fbc_Out_0_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 83ad9eb42523841be9076351fa6c67ea, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -120,15 +99,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _AScrollSpeed: -0.75
-    - _AScrollSppeed: -0.75
     - _ASlashSize: 10
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _BScrollSpeed: -0.4
-    - _BScrollSppeed: -0.4
     - _BSlashSize: 5
-    - _BUILTIN_QueueControl: 0
-    - _BUILTIN_QueueOffset: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -160,8 +135,8 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 14.259475, g: 0, b: 0, a: 1}
+    - _Color: {r: 0, g: 0.012166346, b: 0.2112527, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SlashWidth: {r: 0, g: 0.1, b: 0, a: 0}
+    - _SlashWidth: {r: 0, g: 0.4, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
