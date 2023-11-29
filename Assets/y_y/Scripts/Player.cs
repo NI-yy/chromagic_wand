@@ -32,7 +32,15 @@ public class Player : MonoBehaviour
     public GameObject PlayerHPController;
     public GameObject UI_ColorOrb;
     public GameObject bullet;
-    public GameObject TwoPlayerManager;
+    public GameObject _TwoPlayerManager;
+
+    public GameObject particleSystem_electric;
+    public GameObject particleSystem_electricBall;
+    public GameObject particleSystem_fire;
+    public GameObject particleSystem_leaf;
+    public GameObject particleSystem_water;
+    public GameObject particleSystem_soil;
+
 
     //honeboneí«â¡
     bool lookRight;
@@ -90,7 +98,7 @@ public class Player : MonoBehaviour
         //soundManagerScript = gameManagerObj.GetComponent<SoundManager>();
         playerHPControllerScript = PlayerHPController.GetComponent<PlayerHP>();
 
-        twoPlayerManagerScript = TwoPlayerManager.GetComponent<TwoPlayerManager>();
+        twoPlayerManagerScript = _TwoPlayerManager.GetComponent<TwoPlayerManager>();
     }
 
 
@@ -343,17 +351,39 @@ public class Player : MonoBehaviour
     private void Attack()
     {
         Color color_wand = UI_ColorOrb.GetComponent<Image>().color;
-        string wandColorString = twoPlayerManagerScript.GetWandColor().ToStr();
-        Debug.Log("èÒÇÃêF: " + wandColorString);
-        GameObject currentBullet = Instantiate(bullet, this.transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
-        currentBullet.GetComponent<SpriteRenderer>().color = color_wand;
-        currentBullet.GetComponent<bulletController>().SetBulletColor(wandColorString);
+        //string wandColorString = twoPlayerManagerScript.GetWandColor().ToStr();
+        TwoPlayerManager.WandColor wandColor = twoPlayerManagerScript.GetWandColor();
+        Debug.Log("èÒÇÃêF: " + wandColor);
+        //GameObject currentBullet = Instantiate(bullet, this.transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+        //currentBullet.GetComponent<SpriteRenderer>().color = color_wand;
+        //currentBullet.GetComponent<bulletController>().SetBulletColor(wandColorString);
 
         Vector3 dir = Vector3.right;
         if (!lookRight) { dir = Vector3.left; }
-        var p = Instantiate(projector, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+        //var p = Instantiate(projector, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
         p.GetComponent<PlayerProjector>().Init(projectorData, dir,color_wand);
 
+        ParticleAttack(wandColor);
         anim.SetBool("Attack", true);
+    }
+
+    void ParticleAttack(TwoPlayerManager.WandColor wandColor)
+    {
+        if(wandColor == TwoPlayerManager.WandColor.Red)
+        {
+            var p = Instantiate(particleSystem_fire, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+        }
+        else if (wandColor == TwoPlayerManager.WandColor.Green)
+        {
+            var p = Instantiate(particleSystem_leaf, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+        }
+        else if (wandColor == TwoPlayerManager.WandColor.Blue)
+        {
+            var p = Instantiate(particleSystem_water, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+        }
+        else if (wandColor == TwoPlayerManager.WandColor.Orange)
+        {
+            var p = Instantiate(particleSystem_soil, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+        }
     }
 }
