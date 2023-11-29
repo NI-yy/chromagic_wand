@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: eff_mat_slash_003_wide
-  m_Shader: {fileID: -6465566751694194690, guid: c05ec0958ab724ccc9f542c6dee05fd5, type: 3}
+  m_Name: eff_mat_slash_003
+  m_Shader: {fileID: -6465566751694194690, guid: eb168f8db3c8b44b99936abd8d336b6f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -84,6 +84,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_5baa01faa7e2478ba30ff33a81f15fbc_Out_0_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 83ad9eb42523841be9076351fa6c67ea, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -99,11 +103,15 @@ Material:
     m_Ints: []
     m_Floats:
     - _AScrollSpeed: -1
+    - _AScrollSppeed: -0.75
     - _ASlashSize: 5
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _BScrollSpeed: -0.4
+    - _BScrollSppeed: -0.4
     - _BSlashSize: 2
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -140,3 +148,16 @@ Material:
     - _SlashWidth: {r: 0, g: 0.1, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
+--- !u!114 &3710795465670443145
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
