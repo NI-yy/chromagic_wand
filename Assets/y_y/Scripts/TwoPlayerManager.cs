@@ -37,21 +37,31 @@ public class TwoPlayerManager : MonoBehaviour
         color_wand = wand.GetComponent<SpriteRenderer>().color;
         UI_ColorOrb.GetComponent<Image>().color = color_wand;
 
-        if (KoitanInput.GetDown(ButtonCode.RB) || Input.GetKeyDown(KeyCode.Alpha1))
+        if (KoitanInput.Get(ButtonCode.RB) || Input.GetKey(KeyCode.Alpha1))
         {
-            Debug.Log("RBpushed");
+            //Debug.Log("RBpushed");
+            //if (enableBird)
+            //{
+            //    Debug.Log("MoveBird");
+            //    MoveBird();
+            //    enableBird = false;
+            //}
+            //else
+            //{
+            //    Debug.Log("MovePerson");
+            //    MovePerson();
+            //    enableBird = true;
+            //}
             if (enableBird)
             {
-                Debug.Log("MoveBird");
                 MoveBird();
                 enableBird = false;
             }
-            else
-            {
-                Debug.Log("MovePerson");
-                MovePerson();
-                enableBird = true;
-            }
+        }
+        else if(KoitanInput.GetUp(ButtonCode.RB) || Input.GetKeyUp(KeyCode.Alpha1))
+        {
+            MovePerson();
+            enableBird = true;
         }
         else if (KoitanInput.GetDown(ButtonCode.LB) || Input.GetKeyDown(KeyCode.Alpha2))
         {

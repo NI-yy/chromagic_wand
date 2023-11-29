@@ -2373,7 +2373,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085727345}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -84.2, y: 28.88, z: -10}
+  m_LocalPosition: {x: -43.1, y: 28.88, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2751,9 +2751,15 @@ MonoBehaviour:
   jumpHeightMin: 3
   jumpHeightMax: 10
   jumpTimeMax: 0.2
+  beAbleToDoubleJump: 0
   ground: {fileID: 897911286}
   head: {fileID: 1807890633}
   PlayerHPController: {fileID: 1474229818}
+  UI_ColorOrb: {fileID: 0}
+  bullet: {fileID: 0}
+  TwoPlayerManager: {fileID: 0}
+  projector: {fileID: 0}
+  projectorData: {fileID: 0}
   mass: 1
 --- !u!50 &1267560641
 Rigidbody2D:
@@ -2835,7 +2841,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1267560638}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -84.2, y: -2.16, z: 0}
+  m_LocalPosition: {x: -43.1, y: -2.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2984,7 +2990,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1319472559}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.016342, y: 28.880005, z: -10}
+  m_LocalPosition: {x: -15.01635, y: 28.879993, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4078,6 +4084,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1881510167}
   - component: {fileID: 1881510166}
+  - component: {fileID: 1881510168}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -4162,6 +4169,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1881510168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881510165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &1895082088
 GameObject:
   m_ObjectHideFlags: 0
