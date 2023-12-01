@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHP : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class PlayerHP : MonoBehaviour
         if(currentHPCount < 0)
         {
             Debug.Log("GameOver");
+            SceneManager.LoadScene("Title");
         }
         else
         {

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3060715229752957415}
   - component: {fileID: 3774748205335493518}
   - component: {fileID: -1361596917509105617}
+  - component: {fileID: 5343796115727500741}
   m_Layer: 2
   m_Name: spider
   m_TagString: Untagged
@@ -293,3 +294,15 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &5343796115727500741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4397231123756064548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed8099c028736f4c884e9c4233c88a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

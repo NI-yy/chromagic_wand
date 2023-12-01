@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1475721813701704161}
   - component: {fileID: 7339794568435218371}
   - component: {fileID: 7586831707667821340}
+  - component: {fileID: -3105915987915136068}
   m_Layer: 2
   m_Name: SpitPlant
   m_TagString: Untagged
@@ -204,3 +205,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-3105915987915136068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8596324154824878607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed8099c028736f4c884e9c4233c88a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

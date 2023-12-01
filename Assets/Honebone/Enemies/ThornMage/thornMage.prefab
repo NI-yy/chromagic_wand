@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7685422773851357514}
   - component: {fileID: -8318215540728512207}
   - component: {fileID: 2112982090002589384}
+  - component: {fileID: -8289028590690736204}
   m_Layer: 2
   m_Name: thornMage
   m_TagString: Untagged
@@ -183,3 +184,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-8289028590690736204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8381242164082465227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed8099c028736f4c884e9c4233c88a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
