@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6d15e586396f246ba2651c6fb5dae2, type: 3}
   m_Name: p_pjtor_test
   m_EditorClassIdentifier: 
-  projectile: {fileID: 5528791988881603610, guid: d1c0118f4327b6f4eac6d06d937e1fd6, type: 3}
+  projectile: {fileID: 2134834467227891490, guid: 162b68938c8ec437a8df7788cea20aa7, type: 3}
   SE_GengeratePjtor: {fileID: 0}
   SE_Fire: {fileID: 0}
-  pellets: 1
+  pellets: 3
   fireRandomly: 0
-  spread: 0
-  equidistant: 0
+  spread: 90
+  equidistant: 1
   fireRounds: 1
   fireRate: 0
   projectileSpeed_min: 15
   projectileSpeed_max: 15
-  projectileDuration: 2
+  projectileDuration: 0.1

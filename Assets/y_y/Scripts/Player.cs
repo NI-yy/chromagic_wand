@@ -181,6 +181,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(bulletTag))
+        {
+            playerHPControllerScript.ReduceHP();
+        }
+    }
+
 
     //honebone : 自分が出した弾にあたって速攻GameOverになるのでいったんコメントアウトしてます
     //private void OnTriggerEnter2D(Collider2D collision)
@@ -360,30 +368,73 @@ public class Player : MonoBehaviour
 
         Vector3 dir = Vector3.right;
         if (!lookRight) { dir = Vector3.left; }
-        //var p = Instantiate(projector, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
-        p.GetComponent<PlayerProjector>().Init(projectorData, dir,color_wand);
+        
 
-        ParticleAttack(wandColor);
+        ParticleAttack(wandColor, dir, color_wand);
         anim.SetBool("Attack", true);
     }
 
-    void ParticleAttack(TwoPlayerManager.WandColor wandColor)
+    void ParticleAttack(TwoPlayerManager.WandColor wandColor, Vector3 dir, Color color_wand)
     {
-        if(wandColor == TwoPlayerManager.WandColor.Red)
+        Quaternion quaternion = Quaternion.FromToRotation(Vector3.up, dir);
+        if (wandColor == TwoPlayerManager.WandColor.Red)
         {
-            var p = Instantiate(particleSystem_fire, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+            if (lookRight)
+            {
+                var p = Instantiate(particleSystem_fire, transform.position + new Vector3(0f, 4.0f, 0f), quaternion);
+                Destroy(p, 1.0f);
+            }
+            else
+            {
+                var p = Instantiate(particleSystem_fire, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.Euler(0, 180, 0));
+                Destroy(p, 1.0f);
+            }
+
+            
         }
         else if (wandColor == TwoPlayerManager.WandColor.Green)
         {
             var p = Instantiate(particleSystem_leaf, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+            Destroy(p, 0.7f);
         }
         else if (wandColor == TwoPlayerManager.WandColor.Blue)
         {
-            var p = Instantiate(particleSystem_water, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+            if (lookRight)
+            {
+                var p = Instantiate(particleSystem_water, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+                p.GetComponent<AttackWaterController>().isRight = true;
+                p.GetComponent<AttackWaterController>().ActiveBulletCollider();
+            }
+            else
+            {
+                var p = Instantiate(particleSystem_water, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.Euler(0, 180, 0));
+                p.GetComponent<AttackWaterController>().isRight = false;
+                p.GetComponent<AttackWaterController>().ActiveBulletCollider();
+            }
+            
         }
         else if (wandColor == TwoPlayerManager.WandColor.Orange)
         {
-            var p = Instantiate(particleSystem_soil, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+            if (lookRight)
+            {
+                var p = Instantiate(particleSystem_soil, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+                Destroy(p, 1.0f);
+            }
+            else
+            {
+                var p = Instantiate(particleSystem_soil, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.Euler(0, 180, 0));
+                Destroy(p, 1.0f);
+            }
+            
+        }
+        else if(wandColor == TwoPlayerManager.WandColor.Yellow)
+        {
+            var p = Instantiate(particleSystem_electric, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+
+            var p_ball = Instantiate(projector, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+            p_ball.GetComponent<PlayerProjector>().Init(projectorData, dir, color_wand);
+
+            Destroy(p, 0.7f);
         }
     }
 }
