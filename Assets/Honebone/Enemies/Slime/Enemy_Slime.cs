@@ -120,7 +120,7 @@ public class Enemy_Slime : Enemy
 
     //private void OnTriggerEnter2D(Collider2D collision)
     //{
-    //    if (collision.gameObject.CompareTag(wandTag))
+    //    if (collision.gameObject.CompareTag("FireAttack"))
     //    {
     //        Destroy(this.gameObject);
     //    }

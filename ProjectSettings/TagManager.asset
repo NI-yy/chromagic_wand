@@ -8,6 +8,11 @@ TagManager:
   - bullet
   - Enemy
   - wand
+  - FireAttack
+  - OrangeAttack
+  - WaterAttack
+  - LeafAttack
+  - ElectricAttack
   layers:
   - Default
   - TransparentFX

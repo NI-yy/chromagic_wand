@@ -10,23 +10,23 @@ public class CrackWoodScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //if (collision.gameObject.CompareTag(wandTag))
-        //{
-        //    Destroy(this.gameObject);
-        //}
-
-        if (collision.gameObject.CompareTag(bulletTag))
+        if (collision.gameObject.CompareTag("OrangeAttack"))
         {
-            bulletColor = collision.gameObject.GetComponent<bulletController>().GetBulletColor();
-            Debug.Log(bulletColor);
-            if (bulletColor.Equals("Orange"))
-            {
-                Destroy(collision.gameObject);
-                Destroy(this.gameObject);
-            }
-
-            Destroy(collision.gameObject);
+            Destroy(this.gameObject);
         }
+
+        //if (collision.gameObject.CompareTag(bulletTag))
+        //{
+        //    bulletColor = collision.gameObject.GetComponent<bulletController>().GetBulletColor();
+        //    Debug.Log(bulletColor);
+        //    if (bulletColor.Equals("Orange"))
+        //    {
+        //        Destroy(collision.gameObject);
+        //        Destroy(this.gameObject);
+        //    }
+
+        //    Destroy(collision.gameObject);
+        //}
     }
 
 }

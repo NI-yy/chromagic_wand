@@ -16,7 +16,8 @@ public class TwoPlayerManager : MonoBehaviour
     [SerializeField]
     GameObject UI_ColorOrb;
 
-    public bool wand_init = true; //ゲーム開始時、杖の色は白だが、その白色と鳥の色を混ぜ合わせることはしない
+    public bool wand_init = true;
+    public bool Birdenabled = false; //鳥をgetしたら色交換可能にする
 
     private Color color_wand;
     private Color color_bird;
@@ -37,7 +38,7 @@ public class TwoPlayerManager : MonoBehaviour
         color_wand = wand.GetComponent<SpriteRenderer>().color;
         UI_ColorOrb.GetComponent<Image>().color = color_wand;
 
-        if (KoitanInput.Get(ButtonCode.RB) || Input.GetKey(KeyCode.Alpha1))
+        if (Birdenabled && (KoitanInput.Get(ButtonCode.RB) || Input.GetKey(KeyCode.Alpha1)))
         {
             //Debug.Log("RBpushed");
             //if (enableBird)
@@ -58,12 +59,12 @@ public class TwoPlayerManager : MonoBehaviour
                 enableBird = false;
             }
         }
-        else if(KoitanInput.GetUp(ButtonCode.RB) || Input.GetKeyUp(KeyCode.Alpha1))
+        else if(Birdenabled && (KoitanInput.GetUp(ButtonCode.RB) || Input.GetKeyUp(KeyCode.Alpha1)))
         {
             MovePerson();
             enableBird = true;
         }
-        else if (KoitanInput.GetDown(ButtonCode.LB) || Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Birdenabled && (KoitanInput.GetDown(ButtonCode.LB) || Input.GetKeyDown(KeyCode.Alpha2)))
         {
             ExchangeColor();
         }
@@ -85,26 +86,36 @@ public class TwoPlayerManager : MonoBehaviour
 
     void ExchangeColor()
     {
-        if (!(wand_init))
-        {
-            color_mix = Mixbox.Lerp(color_wand, color_bird, 0.5f);
-            bird.GetComponent<SpriteRenderer>().color = color_wand;
-            wand.GetComponent<SpriteRenderer>().color = color_mix;
-            Color.RGBToHSV(color_mix, out h, out s, out v);
-            h = Remap(h, 0, 1, 0, 360);
-            s = Remap(s, 0, 1, 0, 100);
-            v = Remap(v, 0, 1, 0, 100);
-        }
-        else
-        {
-            bird.GetComponent<SpriteRenderer>().color = color_wand;
-            wand.GetComponent<SpriteRenderer>().color = color_bird;
-            Color.RGBToHSV(color_bird, out h, out s, out v);
-            h = Remap(h, 0, 1, 0, 360);
-            s = Remap(s, 0, 1, 0, 100);
-            v = Remap(v, 0, 1, 0, 100);
-            wand_init = false;
-        }
+        //if (!(wand_init))
+        //{
+        //    color_mix = Mixbox.Lerp(color_wand, color_bird, 0.5f);
+        //    bird.GetComponent<SpriteRenderer>().color = color_wand;
+        //    wand.GetComponent<SpriteRenderer>().color = color_mix;
+        //    Color.RGBToHSV(color_mix, out h, out s, out v);
+        //    h = Remap(h, 0, 1, 0, 360);
+        //    s = Remap(s, 0, 1, 0, 100);
+        //    v = Remap(v, 0, 1, 0, 100);
+        //}
+        //else
+        //{
+        //    bird.GetComponent<SpriteRenderer>().color = color_wand;
+        //    wand.GetComponent<SpriteRenderer>().color = color_bird;
+        //    Color.RGBToHSV(color_bird, out h, out s, out v);
+        //    h = Remap(h, 0, 1, 0, 360);
+        //    s = Remap(s, 0, 1, 0, 100);
+        //    v = Remap(v, 0, 1, 0, 100);
+        //    wand_init = false;
+        //}
+
+        //杖と鳥の色を交換
+        bird.GetComponent<SpriteRenderer>().color = color_wand;
+        wand.GetComponent<SpriteRenderer>().color = color_bird;
+        Color.RGBToHSV(color_bird, out h, out s, out v);
+        h = Remap(h, 0, 1, 0, 360);
+        s = Remap(s, 0, 1, 0, 100);
+        v = Remap(v, 0, 1, 0, 100);
+        wand_init = false;
+
 
         Debug.Log((h,s,v, this.gameObject));
     }
@@ -121,7 +132,7 @@ public class TwoPlayerManager : MonoBehaviour
     {
         if (wand_init)
         {
-            return WandColor.White;
+            return WandColor.Orange;
         }
         else
         {
