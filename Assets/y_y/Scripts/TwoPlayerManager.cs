@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using KoitanLib;
 using Scrtwpns.Mixbox;
+using System.Drawing;
 
 public class TwoPlayerManager : MonoBehaviour
 {
@@ -15,13 +16,14 @@ public class TwoPlayerManager : MonoBehaviour
     GameObject wand;
     [SerializeField]
     GameObject UI_ColorOrb;
+    [SerializeField] ParticleSystem particle_wand;//パーティクルを参照
 
     public bool wand_init = true;
     public bool Birdenabled = false; //鳥をgetしたら色交換可能にする
 
-    private Color color_wand;
-    private Color color_bird;
-    private Color color_mix;
+    private UnityEngine.Color color_wand;
+    private UnityEngine.Color color_bird;
+    private UnityEngine.Color color_mix;
     private float h, s, v;
     private bool enableBird = true;
 
@@ -110,7 +112,12 @@ public class TwoPlayerManager : MonoBehaviour
         //杖と鳥の色を交換
         bird.GetComponent<SpriteRenderer>().color = color_wand;
         wand.GetComponent<SpriteRenderer>().color = color_bird;
-        Color.RGBToHSV(color_bird, out h, out s, out v);
+        var main = particle_wand.main;
+        main.startColor = new ParticleSystem.MinMaxGradient(color_bird);
+        particle_wand.Clear();
+        particle_wand.Play();
+
+        UnityEngine.Color.RGBToHSV(color_bird, out h, out s, out v);
         h = Remap(h, 0, 1, 0, 360);
         s = Remap(s, 0, 1, 0, 100);
         v = Remap(v, 0, 1, 0, 100);

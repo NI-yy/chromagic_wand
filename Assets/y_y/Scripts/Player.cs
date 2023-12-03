@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     public GameObject particleSystem_electric;
     public GameObject particleSystem_electricBall;
     public GameObject particleSystem_fire;
+    public GameObject particleSystem_fire_2;
     public GameObject particleSystem_leaf;
     public GameObject particleSystem_water;
     public GameObject particleSystem_soil;
@@ -77,6 +78,8 @@ public class Player : MonoBehaviour
 
     //攻撃色関係
     private TwoPlayerManager twoPlayerManagerScript;
+
+    private bool attackFlag = true; //1回攻撃するとクールタイム有
 
 
 
@@ -358,27 +361,34 @@ public class Player : MonoBehaviour
 
     private void Attack()
     {
-        Color color_wand = UI_ColorOrb.GetComponent<Image>().color;
-        //string wandColorString = twoPlayerManagerScript.GetWandColor().ToStr();
-        TwoPlayerManager.WandColor wandColor = twoPlayerManagerScript.GetWandColor();
-        Debug.Log("杖の色: " + wandColor);
-        //GameObject currentBullet = Instantiate(bullet, this.transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
-        //currentBullet.GetComponent<SpriteRenderer>().color = color_wand;
-        //currentBullet.GetComponent<bulletController>().SetBulletColor(wandColorString);
+        if (attackFlag)
+        {
+            attackFlag = false;
+            Color color_wand = UI_ColorOrb.GetComponent<Image>().color;
+            //string wandColorString = twoPlayerManagerScript.GetWandColor().ToStr();
+            TwoPlayerManager.WandColor wandColor = twoPlayerManagerScript.GetWandColor();
+            Debug.Log("杖の色: " + wandColor);
+            //GameObject currentBullet = Instantiate(bullet, this.transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+            //currentBullet.GetComponent<SpriteRenderer>().color = color_wand;
+            //currentBullet.GetComponent<bulletController>().SetBulletColor(wandColorString);
 
-        Vector3 dir = Vector3.right;
-        if (!lookRight) { dir = Vector3.left; }
-        
+            Vector3 dir = Vector3.right;
+            if (!lookRight) { dir = Vector3.left; }
 
-        ParticleAttack(wandColor, dir, color_wand);
-        anim.SetBool("Attack", true);
+
+            StartCoroutine(ParticleAttack(wandColor, dir, color_wand));
+        }
     }
 
-    void ParticleAttack(TwoPlayerManager.WandColor wandColor, Vector3 dir, Color color_wand)
+    private IEnumerator ParticleAttack(TwoPlayerManager.WandColor wandColor, Vector3 dir, Color color_wand)
     {
+        anim.SetBool("attack", true);
         Quaternion quaternion = Quaternion.FromToRotation(Vector3.up, dir);
         if (wandColor == TwoPlayerManager.WandColor.Red)
         {
+            anim.SetBool("redAttack", true);
+            yield return new WaitForSeconds(0.2f);
+
             if (lookRight)
             {
                 var p = Instantiate(particleSystem_fire, transform.position + new Vector3(0f, 4.0f, 0f), quaternion);
@@ -390,51 +400,105 @@ public class Player : MonoBehaviour
                 Destroy(p, 1.0f);
             }
 
-            
+            yield return new WaitForSeconds(0.8f); //1つ目のアニメーション終了待ち
+
+
+            anim.SetBool("toAttackFire2", true);
+            yield return new WaitForSeconds(0.1f);
+            if (lookRight)
+            {
+                var p = Instantiate(particleSystem_fire_2, transform.position + new Vector3(0f, 4.0f, 0f), quaternion);
+                Destroy(p, 1.0f);
+            }
+            else
+            {
+                var p = Instantiate(particleSystem_fire_2, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.Euler(0, 180, 0));
+                Destroy(p, 1.0f);
+            }
+
+            StartCoroutine(ResetAnimFlag("redAttack"));
+            StartCoroutine(ResetAnimFlag("toAttackFire2"));
         }
         else if (wandColor == TwoPlayerManager.WandColor.Green)
         {
+            anim.SetBool("greenAttack", true);
+            yield return new WaitForSeconds(0.3f);
+
             var p = Instantiate(particleSystem_leaf, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
             Destroy(p, 0.7f);
+            
+            StartCoroutine(ResetAnimFlag("attack"));
+            StartCoroutine(ResetAnimFlag("greenAttack"));
         }
         else if (wandColor == TwoPlayerManager.WandColor.Blue)
         {
+            anim.SetBool("blueAttack", true);
+            yield return new WaitForSeconds(0.5f);
             if (lookRight)
             {
-                var p = Instantiate(particleSystem_water, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+                var p = Instantiate(particleSystem_water, transform.position + new Vector3(7f, 6.0f, 0f), Quaternion.identity);
                 p.GetComponent<AttackWaterController>().isRight = true;
                 p.GetComponent<AttackWaterController>().ActiveBulletCollider();
             }
             else
             {
-                var p = Instantiate(particleSystem_water, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.Euler(0, 180, 0));
+                var p = Instantiate(particleSystem_water, transform.position + new Vector3(7f, 6.0f, 0f), Quaternion.Euler(0, 180, 0));
                 p.GetComponent<AttackWaterController>().isRight = false;
                 p.GetComponent<AttackWaterController>().ActiveBulletCollider();
             }
-            
+            StartCoroutine(ResetAnimFlag("attack"));
+            StartCoroutine(ResetAnimFlag("blueAttack"));
         }
         else if (wandColor == TwoPlayerManager.WandColor.Orange)
         {
+            anim.SetBool("orangeAttack", true);
+            yield return new WaitForSeconds(1f);
+
             if (lookRight)
             {
-                var p = Instantiate(particleSystem_soil, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
+                var p = Instantiate(particleSystem_soil, transform.position + new Vector3(5f, 7.0f, 0f), Quaternion.identity);
                 Destroy(p, 1.0f);
             }
             else
             {
-                var p = Instantiate(particleSystem_soil, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.Euler(0, 180, 0));
+                var p = Instantiate(particleSystem_soil, transform.position + new Vector3(5f, 7.0f, 0f), Quaternion.Euler(0, 180, 0));
                 Destroy(p, 1.0f);
             }
+
             
+            StartCoroutine(ResetAnimFlag("attack"));
+            StartCoroutine(ResetAnimFlag("orangeAttack"));
         }
         else if(wandColor == TwoPlayerManager.WandColor.Yellow)
         {
+            anim.SetBool("yellowAttack", true);
+            yield return new WaitForSeconds(0.3f);
+
             var p = Instantiate(particleSystem_electric, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
 
             var p_ball = Instantiate(projector, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
             p_ball.GetComponent<PlayerProjector>().Init(projectorData, dir, color_wand);
 
             Destroy(p, 0.7f);
+            
+            StartCoroutine(ResetAnimFlag("yellowAttack"));
         }
+
+        StartCoroutine(ResetAnimFlag("attack"));
+
+        yield return new WaitForSeconds(2.0f);
+        attackFlag = true;
+    }
+
+    //void ResetFlag(string flagName)
+    //{
+    //    anim.SetBool(flagName, false);
+    //}
+
+    private IEnumerator ResetAnimFlag(string flagName)
+    {
+        yield return new WaitForSeconds(1f);
+
+        anim.SetBool(flagName, false);
     }
 }

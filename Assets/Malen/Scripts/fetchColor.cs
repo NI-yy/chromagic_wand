@@ -19,7 +19,8 @@ public class FetchColor : MonoBehaviour
     [SerializeField] float radiusCoverScreenAll;
     [Header("色吸いモード移行にかかる時間(s)")]
     [SerializeField] float duration;
-    [SerializeField] PostProcessLayer PPL;
+    //[SerializeField] PostProcessLayer PPL;
+    [SerializeField] PostProcessVolume PPV;
     [SerializeField] CinemachineVirtualCamera cinemachine;
 
     private void Start()
@@ -37,7 +38,9 @@ public class FetchColor : MonoBehaviour
             if (painter.scale == 0f)
                 painter.scale = radiusCoverScreenAll;
             ChangeAnimation(true);
-            PPL.enabled = true;
+            // PPL.enabled = true;
+            // by kashi
+            PPV.enabled = true;
         }
         if (Input.GetMouseButtonUp(0) || KoitanInput.GetUp(ButtonCode.RB))
         {
@@ -63,6 +66,8 @@ public class FetchColor : MonoBehaviour
     void OnCompleteExtension()
     {
         painter.scale = 0f;
-        PPL.enabled = false;
+        // PPL.enabled = false;
+        // by kashi
+        PPV.enabled = false;
     }
 }

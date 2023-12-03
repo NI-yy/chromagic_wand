@@ -19,12 +19,12 @@ MonoBehaviour:
   refreshPlayerPos: 0
   followPlayerSpeed: 0
   followCurrentPlayer: 0
-  pellets: 8
+  pellets: 1
   fireRandomly: 0
-  spread: 40
+  spread: 25
   equidistant: 0
-  fireRounds: 1
-  fireRate: 0
+  fireRounds: 3
+  fireRate: 0.5
   projectileSpeed_min: 4
   projectileSpeed_max: 8
   projectileDuration: 3
