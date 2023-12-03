@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/kashi/Scenes/Title.unity
     guid: ca645b7719c510246a267b5621ed031d
   - enabled: 1
-    path: Assets/y_y/Scenes/GameScene_yy.unity
-    guid: ad9c587ea98a8a44da8f85f3fae5ea95
+    path: Assets/y_y/Scenes/GameScene_3_yy.unity
+    guid: 577b4bb3532384c45b6282217e987335
   m_configObjects: {}
