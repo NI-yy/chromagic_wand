@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     public GameObject UI_ColorOrb;
     public GameObject bullet;
     public GameObject _TwoPlayerManager;
+    public GameObject soundManager;
 
     public GameObject particleSystem_electric;
     public GameObject particleSystem_electricBall;
@@ -134,6 +135,9 @@ public class Player : MonoBehaviour
     {
         if (isOnGround)
         {
+            anim.SetBool("jumpUp", false);
+            anim.SetBool("jumpDown", true);
+            
             anim.SetBool("onGround", true);
 
             ManageXMoveGround();
@@ -357,12 +361,17 @@ public class Player : MonoBehaviour
         //地面上でスペースキーが押下されたとき、上方向に力を加えることでジャンプする.同時に時間計測が始まる
         if (spaceKeyDown)
         {
-            //Debug.Log("jump");
             rb.AddForce(new Vector2(0, 1) * initialForce, ForceMode2D.Impulse);
             jumpingTimeCount = 0f;
-            //anim.SetBool("jumping", true);
-            //soundManagerScript.PlayOneShot(0);
+            
             afterFirstJump = true;
+
+            if (spaceKeyDown)
+            {
+                soundManager.GetComponent<SoundManager>().PlayJumpSe();
+                anim.SetBool("jumpUp", true);
+                anim.SetBool("jumpDown", false);
+            }
         }
 
         rb.AddForce(new Vector2(0, -1) * gravity);
@@ -378,15 +387,22 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(new Vector2(0, 1) * jumpingForce);
             jumpingTimeCount += Time.deltaTime;
+            
+            
         }
         else if ((spaceKeyDown || KoitanInput.GetDown(ButtonCode.A)) && afterFirstJump && beAbleToDoubleJump)
         {
+            if (spaceKeyDown)
+            {
+                soundManager.GetComponent<SoundManager>().PlayJumpSe();
+                anim.SetBool("jumpUp", true);
+                anim.SetBool("jumpDown", false);
+            }
+
             //2段ジャンプ
-            //Debug.Log("jump");
             rb.AddForce(new Vector2(0, 1) * initialForce, ForceMode2D.Impulse);
             jumpingTimeCount = 0f;
-            //anim.SetBool("jumping", true);
-            //soundManagerScript.PlayOneShot(0);
+            
             afterFirstJump = false;
         }
 
@@ -500,7 +516,8 @@ public class Player : MonoBehaviour
                 Destroy(p, 1.0f);
             }
 
-            
+            soundManager.GetComponent<SoundManager>().PlayRockSe();
+
             StartCoroutine(ResetAnimFlag("attack"));
             StartCoroutine(ResetAnimFlag("orangeAttack"));
         }

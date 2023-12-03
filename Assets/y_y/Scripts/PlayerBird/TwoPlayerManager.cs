@@ -20,8 +20,8 @@ public class TwoPlayerManager : MonoBehaviour
     public bool wand_init = true;
     public bool Birdenabled = false; //íπÇgetÇµÇΩÇÁêFåä∑â¬î\Ç…Ç∑ÇÈ
 
-    private UnityEngine.Color color_wand;
-    private UnityEngine.Color color_bird;
+    [SerializeField] UnityEngine.Color color_wand;
+    [SerializeField] UnityEngine.Color color_bird;
     private UnityEngine.Color color_mix;
     private float h, s, v;
     private bool enableBird = true;
@@ -51,7 +51,7 @@ public class TwoPlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if (Birdenabled && (KoitanInput.Get(ButtonCode.RB) || Input.GetKey(KeyCode.Alpha1)))
+        if (Birdenabled && (KoitanInput.Get(ButtonCode.RB) || Input.GetMouseButtonDown(1)))
         {
             if (enableBird)
             {
@@ -59,7 +59,7 @@ public class TwoPlayerManager : MonoBehaviour
                 enableBird = false;
             }
         }
-        else if (Birdenabled && (KoitanInput.GetUp(ButtonCode.RB) || Input.GetKeyUp(KeyCode.Alpha1)))
+        else if (Birdenabled && (KoitanInput.GetUp(ButtonCode.RB) || Input.GetMouseButtonUp(1)))
         {
             MovePerson();
             enableBird = true;
