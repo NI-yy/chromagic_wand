@@ -81,6 +81,12 @@ public class Player : MonoBehaviour
 
     private bool attackFlag = true; //1回攻撃するとクールタイム有
 
+    //長押し攻撃判定
+    private bool buttonDownFlag = false;
+    private float buttonDownTime = 0f;
+    [SerializeField] float strongAttakTimeTh = 2.0f;
+    private bool enableStrongAttack = false;
+
 
 
 
@@ -110,6 +116,18 @@ public class Player : MonoBehaviour
         GetKeysInput();
         isOnGround = ground.IsOnGround();
         isOnHead = head.IsOnGround();
+
+        if (buttonDownFlag)
+        {
+            buttonDownTime += Time.deltaTime;
+        }
+        
+        if(buttonDownTime >= strongAttakTimeTh)
+        {
+            enableStrongAttack = true;
+            twoPlayerManagerScript.MixColor();
+            Debug.Log("MixColor");
+        }
     }
 
     private void FixedUpdate()
@@ -167,7 +185,23 @@ public class Player : MonoBehaviour
 
         if (KoitanInput.GetDown(ButtonCode.B) || Input.GetMouseButtonDown(0))
         {
+            buttonDownTime = 0f;
+            buttonDownFlag = true;
+        }
+
+        if(KoitanInput.GetUp(ButtonCode.B) || Input.GetMouseButtonUp(0))
+        {
+            buttonDownTime = 0f;
+            buttonDownFlag = false;
+            
             Attack();
+
+            if (enableStrongAttack)
+            {
+                twoPlayerManagerScript.DevideMixedColor();
+            }
+
+            enableStrongAttack = false;
         }
     }
 

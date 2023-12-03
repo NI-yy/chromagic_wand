@@ -40,7 +40,7 @@ public class TitleManager : MonoBehaviour
     {
         //ロードするシーンを変更(yy)
         //SceneManager.LoadScene("SampleScene");
-        SceneManager.LoadScene("GameScene_yy");
+        SceneManager.LoadScene("GameScene_3_yy");
     }
 
     public void OnClickEndButton()

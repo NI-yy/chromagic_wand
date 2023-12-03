@@ -5,6 +5,7 @@ using Scrtwpns.Mixbox;
 using KoitanLib;
 using UnityEngine.UI;
 using KoitanLib;
+using UnityEngine.UIElements;
 
 public class BirdParticleColorController : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class BirdParticleColorController : MonoBehaviour
     Color color_mix;
     [SerializeField] Material birdMaterial;
     [SerializeField] ParticleSystem birdParticleFire;
+    [SerializeField] GameObject twoPlayerManager;
 
     Camera mainCamera;
     //bool flag = true;
@@ -72,7 +74,7 @@ public class BirdParticleColorController : MonoBehaviour
         birdParticleFire.Clear();
         birdParticleFire.Play();
 
-        Debug.Log((color, this.gameObject));
+        twoPlayerManager.GetComponent<TwoPlayerManager>().SetBirdColor(color);
     }
 
     public void SetBirdParticleColor(Color color)
