@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
     private Vector3 playerScale;
     private Vector3 initialPosition;
     private float jumpingTimeCount;
+    private bool jumped = false;
     public float mass;
 
     //敵からの攻撃判定関係
@@ -135,9 +136,13 @@ public class Player : MonoBehaviour
     {
         if (isOnGround)
         {
-            anim.SetBool("jumpUp", false);
-            anim.SetBool("jumpDown", true);
-            
+            if (jumped)
+            {
+                anim.SetBool("jumpDown", true);
+                anim.SetBool("jumpDown", false);
+                jumped = false;
+            }
+
             anim.SetBool("onGround", true);
 
             ManageXMoveGround();
@@ -370,7 +375,8 @@ public class Player : MonoBehaviour
             {
                 soundManager.GetComponent<SoundManager>().PlayJumpSe();
                 anim.SetBool("jumpUp", true);
-                anim.SetBool("jumpDown", false);
+                anim.SetBool("jumpUp", false);
+                jumped = true;
             }
         }
 
@@ -396,7 +402,8 @@ public class Player : MonoBehaviour
             {
                 soundManager.GetComponent<SoundManager>().PlayJumpSe();
                 anim.SetBool("jumpUp", true);
-                anim.SetBool("jumpDown", false);
+                anim.SetBool("jumpUp", false);
+                jumped = true;
             }
 
             //2段ジャンプ
@@ -450,6 +457,8 @@ public class Player : MonoBehaviour
                 Destroy(p, 1.0f);
             }
 
+            soundManager.GetComponent<SoundManager>().PlayFireSe();
+
             yield return new WaitForSeconds(0.8f); //1つ目のアニメーション終了待ち
 
 
@@ -466,6 +475,8 @@ public class Player : MonoBehaviour
                 Destroy(p, 1.0f);
             }
 
+            soundManager.GetComponent<SoundManager>().PlayFireSe();
+
             StartCoroutine(ResetAnimFlag("redAttack"));
             StartCoroutine(ResetAnimFlag("toAttackFire2"));
         }
@@ -476,7 +487,9 @@ public class Player : MonoBehaviour
 
             var p = Instantiate(particleSystem_leaf, transform.position + new Vector3(0f, 4.0f, 0f), Quaternion.identity);
             Destroy(p, 0.7f);
-            
+
+            soundManager.GetComponent<SoundManager>().PlayWindSe();
+
             StartCoroutine(ResetAnimFlag("attack"));
             StartCoroutine(ResetAnimFlag("greenAttack"));
         }
@@ -498,7 +511,8 @@ public class Player : MonoBehaviour
                 p.GetComponent<AttackWaterController>().isRight = false;
                 p.GetComponent<AttackWaterController>().ActiveBulletCollider();
             }
-            
+
+            soundManager.GetComponent<SoundManager>().PlayWaterSe();
         }
         else if (wandColor == TwoPlayerManager.WandColor.Orange)
         {
@@ -532,7 +546,9 @@ public class Player : MonoBehaviour
             p_ball.GetComponent<PlayerProjector>().Init(projectorData, dir, color_wand);
 
             Destroy(p, 0.7f);
-            
+
+            soundManager.GetComponent<SoundManager>().PlayThunderSe();
+
             StartCoroutine(ResetAnimFlag("yellowAttack"));
         }
 

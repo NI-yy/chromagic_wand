@@ -29,4 +29,24 @@ public class SoundManager : MonoBehaviour
     {
         audioSource.PlayOneShot(rock_se);
     }
+
+    public void PlayFireSe()
+    {
+        audioSource.PlayOneShot(fire_se);
+    }
+
+    public void PlayThunderSe()
+    {
+        audioSource.PlayOneShot(thunder_se);
+    }
+
+    public void PlayWaterSe()
+    {
+        audioSource.PlayOneShot(water_se);
+    }
+
+    public void PlayWindSe()
+    {
+        audioSource.PlayOneShot(wind_se);
+    }
 }
