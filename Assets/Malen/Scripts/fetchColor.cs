@@ -13,30 +13,33 @@ public class FetchColor : MonoBehaviour
     private float size;
     private Tween circleAnimation;
     private CirclePainter painter;
-    [Header("F‹z‚¢ƒ‚[ƒh‚ÌÅ‘å”¼Œa")]
+    [Header("æœ€å¤§åŠå¾„")]
     [SerializeField] float radiusMax;
-    [Header("ƒƒCƒ“ƒJƒƒ‰‘S‘Ì‚ğ•¢‚¤”¼Œa")]
+    [Header("ç”»é¢å…¨ä½“ã‚’è¦†ã†åŠå¾„")]
     [SerializeField] float radiusCoverScreenAll;
-    [Header("F‹z‚¢ƒ‚[ƒhˆÚs‚É‚©‚©‚éŠÔ(s)")]
+    [Header("æ‹¡ç¸®ã«ã‹ã‹ã‚‹æ™‚é–“(s)")]
     [SerializeField] float duration;
     //[SerializeField] PostProcessLayer PPL;
     [SerializeField] PostProcessVolume PPV;
     [SerializeField] CinemachineVirtualCamera cinemachine;
+    [SerializeField] SubCamera subCamera;
+
+    
 
     private void Start()
     {
         painter = GetComponent<CirclePainter>();
-        size = 2 * cinemachine.m_Lens.OrthographicSize;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Rƒ{ƒ^ƒ“‚ÅF‹z‚¢ƒ‚[ƒh‚É‚È‚é‚æ‚¤‚É•ÏX(yy)
+        //Rï¿½{ï¿½^ï¿½ï¿½ï¿½ÅFï¿½zï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½hï¿½É‚È‚ï¿½æ‚¤ï¿½É•ÏX(yy)
         if (Input.GetMouseButtonDown(0) || KoitanInput.GetDown(ButtonCode.RB))
         {
             if (painter.scale == 0f)
                 painter.scale = radiusCoverScreenAll;
+
             ChangeAnimation(true);
             // PPL.enabled = true;
             // by kashi
@@ -47,6 +50,7 @@ public class FetchColor : MonoBehaviour
             ChangeAnimation(false);
             Time.timeScale = 1f;
         }
+        subCamera.scale = painter.scale;
     }
 
     void ChangeAnimation(bool isKeyPushed)
