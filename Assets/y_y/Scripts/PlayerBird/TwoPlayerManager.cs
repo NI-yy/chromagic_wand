@@ -42,6 +42,11 @@ public class TwoPlayerManager : MonoBehaviour
         //’¹‚É”’‚ð”½‰f
         bird.GetComponent<BirdParticleColorController>().SetBirdParticleColor(color_bird);
         birdMaterial.color = color_bird;
+
+        UnityEngine.Color.RGBToHSV(color_wand, out h, out s, out v);
+        h = Remap(h, 0, 1, 0, 360);
+        s = Remap(s, 0, 1, 0, 100);
+        v = Remap(v, 0, 1, 0, 100);
     }
 
     private void Update()
