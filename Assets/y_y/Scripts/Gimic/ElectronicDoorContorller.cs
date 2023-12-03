@@ -26,16 +26,22 @@ public class ElectronicDoorContorller : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(bulletTag))
-        {
-            Debug.Log("Trigger");
-            bulletColor = collision.gameObject.GetComponent<bulletController>().GetBulletColor();
-            Debug.Log(bulletColor);
-            if (bulletColor.Equals("Yellow"))
-            {
-                flag = true;
-            }
+        //if (collision.gameObject.CompareTag(bulletTag))
+        //{
+        //    Debug.Log("Trigger");
+        //    bulletColor = collision.gameObject.GetComponent<bulletController>().GetBulletColor();
+        //    Debug.Log(bulletColor);
+        //    if (bulletColor.Equals("Yellow"))
+        //    {
+        //        flag = true;
+        //    }
 
+        //    Destroy(collision.gameObject);
+        //}
+
+        if (collision.gameObject.CompareTag("ElectricAttack"))
+        {
+            flag = true;
             Destroy(collision.gameObject);
         }
     }

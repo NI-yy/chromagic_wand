@@ -25,6 +25,11 @@ public class SoundManager : MonoBehaviour
         audioSource.PlayOneShot(jump_se);
     }
 
+    public void PlaypaletteSe()
+    {
+        audioSource.PlayOneShot(palette_se);
+    }
+
     public void PlayRockSe()
     {
         audioSource.PlayOneShot(rock_se);

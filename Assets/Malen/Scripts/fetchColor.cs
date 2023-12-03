@@ -23,6 +23,7 @@ public class FetchColor : MonoBehaviour
     [SerializeField] PostProcessVolume PPV;
     [SerializeField] CinemachineVirtualCamera cinemachine;
     [SerializeField] SubCamera subCamera;
+    [SerializeField] GameObject soundManager;
 
     
 
@@ -35,7 +36,7 @@ public class FetchColor : MonoBehaviour
     void Update()
     {
         //R�{�^���ŐF�z�����[�h�ɂȂ�悤�ɕύX(yy)
-        if (Input.GetMouseButtonDown(0) || KoitanInput.GetDown(ButtonCode.RB))
+        if (Input.GetMouseButtonDown(1) || KoitanInput.GetDown(ButtonCode.RB))
         {
             if (painter.scale == 0f)
                 painter.scale = radiusCoverScreenAll;
@@ -44,8 +45,11 @@ public class FetchColor : MonoBehaviour
             // PPL.enabled = true;
             // by kashi
             PPV.enabled = true;
+
+            //add sound by yy
+            soundManager.GetComponent<SoundManager>().PlaypaletteSe();
         }
-        if (Input.GetMouseButtonUp(0) || KoitanInput.GetUp(ButtonCode.RB))
+        if (Input.GetMouseButtonUp(1) || KoitanInput.GetUp(ButtonCode.RB))
         {
             ChangeAnimation(false);
             Time.timeScale = 1f;

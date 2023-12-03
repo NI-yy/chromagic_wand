@@ -25,6 +25,22 @@ public class PlayerHP : MonoBehaviour
         }
     }
 
+    public void IncreaseHP(int increaseNum)
+    {
+        maxHP = currentHPCount + increaseNum;
+
+        for (int i = 0; i < maxHP; i++)
+        {
+            // プレハブをインスタンス化
+            GameObject instance = Instantiate(prefab, transform.position, Quaternion.identity);
+            // インスタンス化したオブジェクトをこのオブジェクトの子として設定
+            instance.transform.SetParent(transform);
+            playerHPs.Add(instance);
+        }
+
+        currentHPCount = maxHP;
+    }
+
     public void ReduceHP()
     {
         currentHPCount--;
