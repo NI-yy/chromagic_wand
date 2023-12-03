@@ -4,24 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using KoitanLib;
 using Scrtwpns.Mixbox;
+using System.Drawing;
 
 public class TwoPlayerManager : MonoBehaviour
 {
     [SerializeField]
     GameObject person;
-    [SerializeField]
-    GameObject bird;
-    [SerializeField]
-    GameObject wand;
+    [SerializeField] GameObject bird;
+    [SerializeField] Material birdMaterial;
+
     [SerializeField]
     GameObject UI_ColorOrb;
+    [SerializeField] ParticleSystem particle_wand;//パーティクルを参照
 
     public bool wand_init = true;
     public bool Birdenabled = false; //鳥をgetしたら色交換可能にする
 
-    private Color color_wand;
-    private Color color_bird;
-    private Color color_mix;
+    private UnityEngine.Color color_wand;
+    private UnityEngine.Color color_bird;
+    private UnityEngine.Color color_mix;
     private float h, s, v;
     private bool enableBird = true;
 
@@ -29,30 +30,17 @@ public class TwoPlayerManager : MonoBehaviour
 
     private void Start()
     {
-        
+        //最初杖の色はオレンジ色
+        color_wand = new UnityEngine.Color(1f, 0.64f, 0f);
     }
 
     private void Update()
     {
-        color_bird = bird.GetComponent<SpriteRenderer>().color;
-        color_wand = wand.GetComponent<SpriteRenderer>().color;
+        color_bird = birdMaterial.color;
         UI_ColorOrb.GetComponent<Image>().color = color_wand;
 
         if (Birdenabled && (KoitanInput.Get(ButtonCode.RB) || Input.GetKey(KeyCode.Alpha1)))
         {
-            //Debug.Log("RBpushed");
-            //if (enableBird)
-            //{
-            //    Debug.Log("MoveBird");
-            //    MoveBird();
-            //    enableBird = false;
-            //}
-            //else
-            //{
-            //    Debug.Log("MovePerson");
-            //    MovePerson();
-            //    enableBird = true;
-            //}
             if (enableBird)
             {
                 MoveBird();
@@ -72,15 +60,13 @@ public class TwoPlayerManager : MonoBehaviour
 
     public void MovePerson()
     {
-        bird.GetComponent<BirdColorController>().enabled = false;
-        //person.GetComponent<PersonController>().enabled = true;
+        bird.GetComponent<BirdParticleColorController>().enabled = false;
         person.GetComponent<Player>().enabled = true;
     }
 
     public void MoveBird()
     {
-        bird.GetComponent<BirdColorController>().enabled = true;
-        //person.GetComponent<PersonController>().enabled = false;
+        bird.GetComponent<BirdParticleColorController>().enabled = true;
         person.GetComponent<Player>().enabled = false;
     }
 
@@ -108,16 +94,28 @@ public class TwoPlayerManager : MonoBehaviour
         //}
 
         //杖と鳥の色を交換
-        bird.GetComponent<SpriteRenderer>().color = color_wand;
-        wand.GetComponent<SpriteRenderer>().color = color_bird;
-        Color.RGBToHSV(color_bird, out h, out s, out v);
+
+        //鳥の色を杖の色に
+        bird.GetComponent<BirdParticleColorController>().SetBirdParticleColor(color_wand);
+
+        //杖の色を鳥の色に
+        var main = particle_wand.main;
+        main.startColor = new ParticleSystem.MinMaxGradient(color_bird);
+        particle_wand.Clear();
+        particle_wand.Play();
+
+        UnityEngine.Color.RGBToHSV(color_bird, out h, out s, out v);
         h = Remap(h, 0, 1, 0, 360);
         s = Remap(s, 0, 1, 0, 100);
         v = Remap(v, 0, 1, 0, 100);
+
+        //鳥と杖の色を交換しておく
+        var color_temp = color_bird;
+        color_bird = color_wand;
+        color_wand = color_temp;
+
+        
         wand_init = false;
-
-
-        Debug.Log((h,s,v, this.gameObject));
     }
 
     // リマップを行う関数

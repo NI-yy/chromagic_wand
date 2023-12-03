@@ -6,7 +6,7 @@ using KoitanLib;
 using UnityEngine.UI;
 using KoitanLib;
 
-public class BirdColorController : MonoBehaviour
+public class BirdParticleColorController : MonoBehaviour
 {
     public float moveSpeed = 5.0f; // 移動速度
     private Texture2D tex = null;
@@ -16,7 +16,9 @@ public class BirdColorController : MonoBehaviour
     Color color_2;
     [SerializeField]
     Color color_mix;
-    
+    [SerializeField] Material birdMaterial;
+    [SerializeField] ParticleSystem birdParticleFire;
+
     Camera mainCamera;
     //bool flag = true;
     float h, s, v;
@@ -29,8 +31,7 @@ public class BirdColorController : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
-        layerNum_init = this.gameObject.GetComponent<SpriteRenderer>().sortingOrder;
-        Debug.Log(layerNum_init);
+        SetBirdParticleColor(Color.white);
     }
 
     // Update is called once per frame
@@ -45,23 +46,9 @@ public class BirdColorController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) || (KoitanInput.GetDown(ButtonCode.B)))
         {
-            //レイヤーを一番にしないとなぜか色を取ってこれない
-            this.gameObject.GetComponent<SpriteRenderer>().sortingOrder = -100;
-            Debug.Log(this.gameObject.GetComponent<SpriteRenderer>().sortingOrder);
             StartCoroutine(ColorPicker());
-            
         }
 
-        //if (Input.GetMouseButtonDown(1))
-        //{
-        //    color_mix = Mixbox.Lerp(color, color_2, 0.5f);
-        //    Debug.Log(color_mix);
-        //    Color.RGBToHSV(color_mix, out h, out s, out v);
-        //    Debug.Log((h, s, v));
-        //    SpriteRenderer spriterenderer = GetComponent<SpriteRenderer>();
-        //    spriterenderer.color = color_mix;
-        //    UI_ColorOrb.GetComponent<Image>().color = color_mix;
-        //}
     }
 
     IEnumerator ColorPicker()
@@ -70,28 +57,31 @@ public class BirdColorController : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         Vector3 pos = transform.position;
-        pos = pos + new Vector3(0.51f, 0.25f, 0f);
+        pos = pos + new Vector3(2.5f, 2.46f, 0f);
         // ワールド座標をスクリーン座標に変換します。
         Vector3 screenPosition = mainCamera.WorldToScreenPoint(pos);
 
         Vector2 pos_2d = new Vector2(screenPosition.x, screenPosition.y);
         tex.ReadPixels(new Rect(pos_2d.x, pos_2d.y, 1, 1), 0, 0); //写真撮ってtexに保存
 
-        //if (flag)
-        //{
-        //    color = tex.GetPixel(0, 0);
-        //    flag = !flag;
-        //}
-        //else
-        //{
-        //    color_2 = tex.GetPixel(0, 0);
-        //    flag = !flag;
-        //}
-        //Debug.Log((pos_2d.x + 0.51f, pos_2d.y + 0.25f));
-
         color = tex.GetPixel(0, 0);
-        SpriteRenderer spriterenderer = GetComponent<SpriteRenderer>();
-        spriterenderer.color = color;
-        this.gameObject.GetComponent<SpriteRenderer>().sortingOrder = layerNum_init;
+        birdMaterial.color = color;
+
+        var main = birdParticleFire.main;
+        main.startColor = new ParticleSystem.MinMaxGradient(color);
+        birdParticleFire.Clear();
+        birdParticleFire.Play();
+
+        Debug.Log((color, this.gameObject));
+    }
+
+    public void SetBirdParticleColor(Color color)
+    {
+        birdMaterial.color = color;
+
+        var main = birdParticleFire.main;
+        main.startColor = new ParticleSystem.MinMaxGradient(color);
+        birdParticleFire.Clear();
+        birdParticleFire.Play();
     }
 }
