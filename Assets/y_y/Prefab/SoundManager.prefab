@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &8434001187623155300
 AudioSource:
@@ -148,3 +148,5 @@ MonoBehaviour:
   thunder_se: {fileID: 8300000, guid: 8c3e937b5a6603d458d47287b7dc907f, type: 3}
   water_se: {fileID: 8300000, guid: 8d86b0a2fab4e8d4db09a820ca7b2724, type: 3}
   wind_se: {fileID: 8300000, guid: 609406589ec02a647ae1193b191476e5, type: 3}
+  walk_se: {fileID: 8300000, guid: 6387b86e3ba539747b3b58c10b92a90f, type: 3}
+  walkSEFlag: 0

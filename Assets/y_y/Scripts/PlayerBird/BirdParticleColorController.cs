@@ -20,6 +20,8 @@ public class BirdParticleColorController : MonoBehaviour
     [SerializeField] Material birdMaterial;
     [SerializeField] ParticleSystem birdParticleFire;
     [SerializeField] GameObject twoPlayerManager;
+    [SerializeField] GameObject player;
+    
 
     Camera mainCamera;
     //bool flag = true;
@@ -39,7 +41,17 @@ public class BirdParticleColorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontalKeyRaw = KoitanInput.GetStick(StickCode.LeftStick).x;
+        float horizontalKeyRaw;
+
+        if (player.GetComponent<Player>().lookRight)
+        {
+            horizontalKeyRaw = KoitanInput.GetStick(StickCode.LeftStick).x;
+        }
+        else
+        {
+            horizontalKeyRaw =  - KoitanInput.GetStick(StickCode.LeftStick).x;
+        }
+        
         float verticalKeyRaw = KoitanInput.GetStick(StickCode.LeftStick).y;
 
         // オブジェクトを移動させる
@@ -59,7 +71,15 @@ public class BirdParticleColorController : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         Vector3 pos = transform.position;
-        pos = pos + new Vector3(2.5f, 2.46f, 0f);
+        if (player.GetComponent<Player>().lookRight)
+        {
+            pos = pos + new Vector3(2.5f, 2.46f, 0f);
+        }
+        else
+        {
+            pos = pos + new Vector3(-2.5f, 2.46f, 0f);
+        }
+        
         // ワールド座標をスクリーン座標に変換します。
         Vector3 screenPosition = mainCamera.WorldToScreenPoint(pos);
 
@@ -86,4 +106,6 @@ public class BirdParticleColorController : MonoBehaviour
         birdParticleFire.Clear();
         birdParticleFire.Play();
     }
+
+    
 }

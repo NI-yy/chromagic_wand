@@ -16,7 +16,7 @@ public class ThornsController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("OrangeAttack"))
+        if (collision.gameObject.CompareTag("FireAttack"))
         {
             burnEffect.SetActive(true);
             StartCoroutine(ActivateSecondObjectAfterDelay(1f));

@@ -253,6 +253,8 @@ MonoBehaviour:
   Birdenabled: 1
   color_wand: {r: 0, g: 0, b: 0, a: 0}
   color_bird: {r: 0, g: 0, b: 0, a: 0}
+  birdPos_init: {x: 0, y: 0, z: 0}
+  resetPosSpeed: 0
 --- !u!4 &187846445
 Transform:
   m_ObjectHideFlags: 0
@@ -2720,6 +2722,134 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8d035e20292f6740beceea1dce7ebbb, type: 3}
+--- !u!1 &818537474
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 818537476}
+  - component: {fileID: 818537475}
+  m_Layer: 0
+  m_Name: WalkSE
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!82 &818537475
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818537474}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6387b86e3ba539747b3b58c10b92a90f, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &818537476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818537474}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &862039792 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6233735538854084691, guid: 0361d8b8714343d42aeb0a6d0c468c28, type: 3}
@@ -2911,11 +3041,11 @@ MonoBehaviour:
   particleSystem_leaf: {fileID: 855091311905855105, guid: dd47f56ba74a44449a2288d8b9527c1c, type: 3}
   particleSystem_water: {fileID: 9109118784011100538, guid: f60bcf1b258f942498adb55acaa30560, type: 3}
   particleSystem_soil: {fileID: 2951332362598230419, guid: 2ce792bd4f754487bbacae32db14b586, type: 3}
+  lookRight: 0
   projector: {fileID: 2341112385302908232, guid: df1acc3c4015a06499ff32f8c0fb8f69, type: 3}
   projectorData: {fileID: 11400000, guid: ff44a4397e7f90d4ab2570e3635060f5, type: 2}
   mass: 1
   strongAttakTimeTh: 2
-  knockBackPower: 0
 --- !u!50 &1122168154
 Rigidbody2D:
   serializedVersion: 4
@@ -3271,6 +3401,7 @@ MonoBehaviour:
   birdMaterial: {fileID: 2100000, guid: 55a5bfb7d346c49ea8fe01e08abf1553, type: 2}
   birdParticleFire: {fileID: 2021421119}
   twoPlayerManager: {fileID: 187846443}
+  player: {fileID: 0}
 --- !u!1001 &487443364331110053
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3391,6 +3522,10 @@ PrefabInstance:
     - target: {fileID: 6962542024593498407, guid: 108bd24b53788ce4c985ad546eaa6686, type: 3}
       propertyPath: m_Name
       value: BGMManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6962542024593498407, guid: 108bd24b53788ce4c985ad546eaa6686, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

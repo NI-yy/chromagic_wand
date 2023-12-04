@@ -9,7 +9,7 @@ public class WingGimicController : MonoBehaviour
 
     private void Start()
     {
-        this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(1, 1) * initialForce, ForceMode2D.Impulse);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

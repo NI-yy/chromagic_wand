@@ -11,13 +11,20 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip thunder_se;
     [SerializeField] AudioClip water_se;
     [SerializeField] AudioClip wind_se;
+    [SerializeField] AudioClip walk_se;
 
     private AudioSource audioSource;
+    private bool isPlaying = false;
 
     // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void PlayJumpSe()
@@ -53,5 +60,32 @@ public class SoundManager : MonoBehaviour
     public void PlayWindSe()
     {
         audioSource.PlayOneShot(wind_se);
+    }
+
+    public void StartPlayingWalkSE()
+    {
+        Debug.Log(("PlaySE", this.gameObject));
+        if (!isPlaying)
+        {
+            Debug.Log(("StartCoroutine", this.gameObject));
+            isPlaying = true;
+            StartCoroutine(PlaySoundEffect());
+        }
+    }
+
+    // å¯â âπÇÃçƒê∂Çí‚é~Ç∑ÇÈ
+    public void StopPlayingWalkSE()
+    {
+        Debug.Log("StopSE");
+        isPlaying = false;
+    }
+
+    IEnumerator PlaySoundEffect()
+    {
+        while (isPlaying) // ñ≥å¿ÉãÅ[Év
+        {
+            audioSource.PlayOneShot(walk_se);
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }

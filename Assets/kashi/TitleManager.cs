@@ -11,6 +11,9 @@ public class TitleManager : MonoBehaviour
 {
     public GameObject startButton_;
     public GameObject endButton_;
+    public GameObject PoseMenu;
+
+    private bool flag = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +24,10 @@ public class TitleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(KoitanInput.GetUp(ButtonCode.Start) && flag)
+        {
+            PoseMenu.SetActive(false);
+        }
     }
 
     public void SelectedStartMenu()
@@ -34,6 +40,8 @@ public class TitleManager : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(endButton_);
+
+        
     }
 
     public void OnClickStartButton()

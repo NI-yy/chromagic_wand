@@ -7,6 +7,7 @@ public class GroundCheck : MonoBehaviour
     [Header("エフェクトがついた床を判定するか")] public bool checkPlatformGround = true;
 
     private string groundTag = "Ground";
+    private string surinukeTag = "Surinuke";
     private string platformTag = "PlatformGround";
     private List<string> tagList = new List<string>();
 
@@ -17,6 +18,7 @@ public class GroundCheck : MonoBehaviour
     void Start()
     {
         tagList.Add(groundTag);
+        tagList.Add(surinukeTag);
     }
 
     // Update is called once per frame

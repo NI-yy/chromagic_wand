@@ -26,6 +26,11 @@ public class TwoPlayerManager : MonoBehaviour
     private float h, s, v;
     private bool enableBird = true;
 
+    [SerializeField] Vector3 birdPos_init;
+    [SerializeField] float resetPosSpeed;
+    private bool moveDone = false;
+    private bool flag = false;
+
     public enum WandColor { Other, White, Orange, Yellow, Green, Blue, Purple, Red, Black }
 
     private void Start()
@@ -62,12 +67,32 @@ public class TwoPlayerManager : MonoBehaviour
         else if (Birdenabled && (KoitanInput.GetUp(ButtonCode.RB) || Input.GetMouseButtonUp(1)))
         {
             MovePerson();
+            ResetBirdPos();
             enableBird = true;
         }
         else if (Birdenabled && (KoitanInput.GetDown(ButtonCode.LB) || Input.GetKeyDown(KeyCode.Alpha2)))
         {
             ExchangeColor();
         }
+
+
+        if (flag)
+        {
+            if (!(moveDone))
+            {
+                Debug.Log("ResetBirdPos");
+                Vector3 targetPosition = birdPos_init; // 目的の位置の座標を指定
+                Transform birdTransform = bird.transform;
+                birdTransform.localPosition = Vector3.Lerp(birdTransform.localPosition, targetPosition, resetPosSpeed * Time.deltaTime);
+
+                if (Vector3.Distance(bird.transform.localPosition, birdPos_init) < 0.001f)
+                {
+                    moveDone = true;
+                    flag = false;
+                }
+            }
+        }
+        
     }
 
     public void MovePerson()
@@ -186,10 +211,14 @@ public class TwoPlayerManager : MonoBehaviour
     {
         if (s >= 50 && v >= 50)
         {
-            if (0 <= h && h < 45)
+            if (0 <= h && h < 10)
+            {
+                //return WandColor.Orange;
+                return WandColor.Red;
+            }
+            else if(10 <= h && h < 45)
             {
                 return WandColor.Orange;
-                //return WandColor.Red;
             }
             else if (45 <= h && h < 75)
             {
@@ -203,11 +232,11 @@ public class TwoPlayerManager : MonoBehaviour
             {
                 return WandColor.Blue;
             }
-            else if (270 <= h && h < 310)
+            else if (270 <= h && h < 300)
             {
                 return WandColor.Purple;
             }
-            else if (310 <= h && h < 360)
+            else if (300 <= h && h < 360)
             {
                 return WandColor.Red;
             }
@@ -222,5 +251,11 @@ public class TwoPlayerManager : MonoBehaviour
         }
 
         return WandColor.Other;
+    }
+
+    public void ResetBirdPos()
+    {
+        flag = true;
+        moveDone = false;
     }
 }
