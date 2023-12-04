@@ -142,12 +142,12 @@ public class Player : MonoBehaviour
         {
             if (jumped)
             {
-                anim.SetBool("jumpDown", true);
-                anim.SetBool("jumpDown", false);
+                //anim.SetBool("jumpDown", true);
                 jumped = false;
             }
 
             anim.SetBool("onGround", true);
+            anim.SetBool("jumpUp", false);
 
             ManageXMoveGround();
             ManageYMoveGround();
@@ -381,7 +381,6 @@ public class Player : MonoBehaviour
             {
                 soundManager.GetComponent<SoundManager>().PlayJumpSe();
                 anim.SetBool("jumpUp", true);
-                anim.SetBool("jumpUp", false);
                 jumped = true;
             }
         }
