@@ -92,6 +92,7 @@ public class Player : MonoBehaviour
 
 
 
+
     /////////////////////////　　　イベント関数　　　////////////////////////////
 
 
@@ -110,6 +111,8 @@ public class Player : MonoBehaviour
         playerHPControllerScript = PlayerHPController.GetComponent<PlayerHP>();
 
         twoPlayerManagerScript = _TwoPlayerManager.GetComponent<TwoPlayerManager>();
+
+        
     }
 
 
@@ -134,6 +137,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         if (isOnGround)
         {
             if (jumped)
@@ -159,6 +163,7 @@ public class Player : MonoBehaviour
             ManageYMoveAir();
 
         }
+        
         ResetKeyDown();
 
 
@@ -232,6 +237,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag(bulletTag))
         {
             playerHPControllerScript.ReduceHP();
+            Destroy(collision.gameObject);
         }
     }
 
@@ -420,6 +426,7 @@ public class Player : MonoBehaviour
     {
         if (attackFlag)
         {
+
             attackFlag = false;
             Color color_wand = UI_ColorOrb.GetComponent<Image>().color;
             //string wandColorString = twoPlayerManagerScript.GetWandColor().ToStr();

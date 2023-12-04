@@ -11,6 +11,8 @@ public class ElectronicDoorContorller : MonoBehaviour
     private string bulletTag = "bullet";
     private string bulletColor;
 
+    [SerializeField] GameObject openEffect;
+
     private void Update()
     {
         if (flag)
@@ -42,6 +44,8 @@ public class ElectronicDoorContorller : MonoBehaviour
         if (collision.gameObject.CompareTag("ElectricAttack"))
         {
             flag = true;
+            openEffect.SetActive(true);
+            GetComponent<BoxCollider2D>().enabled = false;
             Destroy(collision.gameObject);
         }
     }
