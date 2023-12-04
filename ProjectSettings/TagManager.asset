@@ -13,6 +13,7 @@ TagManager:
   - WaterAttack
   - LeafAttack
   - ElectricAttack
+  - StageArea
   layers:
   - Default
   - TransparentFX
