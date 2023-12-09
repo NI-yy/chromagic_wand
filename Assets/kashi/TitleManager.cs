@@ -40,8 +40,6 @@ public class TitleManager : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(endButton_);
-
-        
     }
 
     public void OnClickStartButton()
