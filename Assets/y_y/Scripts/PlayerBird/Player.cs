@@ -4,6 +4,7 @@ using UnityEngine;
 //using Cinemachine;
 using KoitanLib;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Player : MonoBehaviour
 {
@@ -88,6 +89,13 @@ public class Player : MonoBehaviour
     private float buttonDownTime = 0f;
     [SerializeField] float strongAttakTimeTh = 2.0f;
     private bool enableStrongAttack = false;
+
+    
+    public int invincibility_frame = 3; //ノックバック時、何秒間点滅させるか(無敵時間に等しい)
+    public float brinking_cycle = 0.1f; //点滅周期
+    private bool isInvincible = false; //無敵時間内かどうか。true時、攻撃を受けない
+    [Tooltip("Attach all parts of player here.")]
+    public GameObject[] player_parts;
 
 
 
@@ -228,21 +236,45 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag(enemyTag))
+        if (collision.gameObject.CompareTag(enemyTag) && !(isInvincible))
         {
             playerHPControllerScript.ReduceHP();
+            isInvincible = true;
+            StartCoroutine(KnockBackBlinking());
+            isInvincible = false;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(bulletTag))
+        if (collision.gameObject.CompareTag(bulletTag) && !(isInvincible))
         {
             playerHPControllerScript.ReduceHP();
+            isInvincible = true;
+            StartCoroutine(KnockBackBlinking());
+            isInvincible = false;
             Destroy(collision.gameObject);
         }
     }
 
+    IEnumerator KnockBackBlinking()
+    {
+        for (int i = 0; i < invincibility_frame; i++)
+        {
+            //ノックバック時の点滅
+            yield return new WaitForSeconds(brinking_cycle);
+            foreach (GameObject obj in player_parts)
+            {
+                obj.SetActive(false);
+            }
+            yield return new WaitForSeconds(brinking_cycle);
+            foreach (GameObject obj in player_parts)
+            {
+                obj.SetActive(true);
+            }
+        }
+        
+    }
 
     //honebone : 自分が出した弾にあたって速攻GameOverになるのでいったんコメントアウトしてます
     //private void OnTriggerEnter2D(Collider2D collision)
