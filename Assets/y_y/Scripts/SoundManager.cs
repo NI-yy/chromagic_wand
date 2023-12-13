@@ -12,6 +12,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip water_se;
     [SerializeField] AudioClip wind_se;
     [SerializeField] AudioClip walk_se;
+    [SerializeField] AudioClip item_get_se;
 
     private AudioSource audioSource;
     private bool isPlaying = false;
@@ -87,5 +88,10 @@ public class SoundManager : MonoBehaviour
             audioSource.PlayOneShot(walk_se);
             yield return new WaitForSeconds(0.5f);
         }
+    }
+
+    public void PlayItemGetSe()
+    {
+        audioSource.PlayOneShot(item_get_se);
     }
 }

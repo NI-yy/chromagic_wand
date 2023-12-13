@@ -6,6 +6,7 @@ public class WingGimicController : MonoBehaviour
 {
     [SerializeField] GameObject player;
     [SerializeField] float initialForce;
+    [SerializeField] GameObject soundManager;
 
     private void Start()
     {
@@ -18,6 +19,7 @@ public class WingGimicController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             player.GetComponent<Player>().beAbleToDoubleJump = true;
+            soundManager.GetComponent<SoundManager>().PlayItemGetSe();
             Destroy(this.gameObject);
         }
     }

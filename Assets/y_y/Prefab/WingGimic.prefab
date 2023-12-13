@@ -93,6 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   initialForce: 0
+  soundManager: {fileID: 662045493741589189, guid: fce044b42c3a92148bbdd3ebaf8d0422, type: 3}
 --- !u!1 &7635246015420663934
 GameObject:
   m_ObjectHideFlags: 0

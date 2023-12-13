@@ -149,4 +149,4 @@ MonoBehaviour:
   water_se: {fileID: 8300000, guid: 8d86b0a2fab4e8d4db09a820ca7b2724, type: 3}
   wind_se: {fileID: 8300000, guid: 609406589ec02a647ae1193b191476e5, type: 3}
   walk_se: {fileID: 8300000, guid: 6387b86e3ba539747b3b58c10b92a90f, type: 3}
-  walkSEFlag: 0
+  item_get_se: {fileID: 8300000, guid: c62ce68bfe045434d9da212d8ac34950, type: 3}

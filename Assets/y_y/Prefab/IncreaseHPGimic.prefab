@@ -178,6 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: {fileID: 0}
   increaseNum: 5
+  soundManager: {fileID: 0}
 --- !u!95 &1996947433219500102
 Animator:
   serializedVersion: 5
