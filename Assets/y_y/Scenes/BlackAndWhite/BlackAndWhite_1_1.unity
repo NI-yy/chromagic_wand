@@ -153,6 +153,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e00f48ccc92b2b48ac7b63be6d2040c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colliderNum: 0
+  virtualCamera_0: {fileID: 0}
+  virtualCamera_1: {fileID: 0}
+  virtualCamera_2: {fileID: 0}
+  virtualCamera_3: {fileID: 0}
 --- !u!61 &84318433
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2757,10 +2762,20 @@ MonoBehaviour:
   PlayerHPController: {fileID: 1474229818}
   UI_ColorOrb: {fileID: 0}
   bullet: {fileID: 0}
-  TwoPlayerManager: {fileID: 0}
+  _TwoPlayerManager: {fileID: 0}
+  soundManager: {fileID: 0}
+  particleSystem_electric: {fileID: 0}
+  particleSystem_electricBall: {fileID: 0}
+  particleSystem_fire: {fileID: 0}
+  particleSystem_fire_2: {fileID: 0}
+  particleSystem_leaf: {fileID: 0}
+  particleSystem_water: {fileID: 0}
+  particleSystem_soil: {fileID: 0}
   projector: {fileID: 0}
   projectorData: {fileID: 0}
   mass: 1
+  strongAttakTimeTh: 2
+  knockBackPower: 20
 --- !u!50 &1267560641
 Rigidbody2D:
   serializedVersion: 4
@@ -4181,17 +4196,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 3
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_RenderingLayers: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_ShadowRenderingLayers: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 0
 --- !u!1 &1895082088
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,29 +4,17 @@ using UnityEngine;
 
 public class CrackWoodScript : MonoBehaviour
 {
-    string wandTag = "wand";
-    private string bulletTag = "bullet";
-    private string bulletColor;
+    [SerializeField] GameObject WallImage;
+    [SerializeField] GameObject CrackParticle;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("OrangeAttack"))
         {
-            Destroy(this.gameObject);
+            WallImage.SetActive(false);
+            CrackParticle.SetActive(true);
+            GetComponent<BoxCollider2D>().enabled = false;
         }
-
-        //if (collision.gameObject.CompareTag(bulletTag))
-        //{
-        //    bulletColor = collision.gameObject.GetComponent<bulletController>().GetBulletColor();
-        //    Debug.Log(bulletColor);
-        //    if (bulletColor.Equals("Orange"))
-        //    {
-        //        Destroy(collision.gameObject);
-        //        Destroy(this.gameObject);
-        //    }
-
-        //    Destroy(collision.gameObject);
-        //}
     }
 
 }

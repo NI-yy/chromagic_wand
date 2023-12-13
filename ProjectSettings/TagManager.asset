@@ -13,6 +13,8 @@ TagManager:
   - WaterAttack
   - LeafAttack
   - ElectricAttack
+  - StageArea
+  - Surinuke
   layers:
   - Default
   - TransparentFX

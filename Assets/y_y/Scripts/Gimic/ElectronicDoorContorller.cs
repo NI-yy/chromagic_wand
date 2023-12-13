@@ -11,6 +11,8 @@ public class ElectronicDoorContorller : MonoBehaviour
     private string bulletTag = "bullet";
     private string bulletColor;
 
+    [SerializeField] GameObject openEffect;
+
     private void Update()
     {
         if (flag)
@@ -26,16 +28,24 @@ public class ElectronicDoorContorller : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(bulletTag))
-        {
-            Debug.Log("Trigger");
-            bulletColor = collision.gameObject.GetComponent<bulletController>().GetBulletColor();
-            Debug.Log(bulletColor);
-            if (bulletColor.Equals("Yellow"))
-            {
-                flag = true;
-            }
+        //if (collision.gameObject.CompareTag(bulletTag))
+        //{
+        //    Debug.Log("Trigger");
+        //    bulletColor = collision.gameObject.GetComponent<bulletController>().GetBulletColor();
+        //    Debug.Log(bulletColor);
+        //    if (bulletColor.Equals("Yellow"))
+        //    {
+        //        flag = true;
+        //    }
 
+        //    Destroy(collision.gameObject);
+        //}
+
+        if (collision.gameObject.CompareTag("ElectricAttack"))
+        {
+            flag = true;
+            openEffect.SetActive(true);
+            GetComponent<BoxCollider2D>().enabled = false;
             Destroy(collision.gameObject);
         }
     }
